@@ -13,6 +13,7 @@ extensions:
   - react
   createdDate: 04/25/2017 12:00:00 AM
 ---
+copy of: https://github.com/pnp/sp-dev-fx-webparts/tree/master/samples/react-faqapp
 # Frequently Asked Questions App
 ##Update
 - We change the color palette of the design to blue. 
