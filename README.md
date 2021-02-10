@@ -14,7 +14,11 @@ extensions:
   createdDate: 04/25/2017 12:00:00 AM
 ---
 # Frequently Asked Questions App
-
+##Update
+- We change the color palette of the design to blue. 
+- Add the ability to navigate through the faq using keybord.
+- Adding french text to the list.
+- Now, the faq work with a different sharepoint list(see below).
 ## Summary
 - This Web Part allows users to create Frequently Asked Questions(Faq App) in modern and classic SharePoint pages.
 - This webpart allows to search within questions and answers which are stored in a SharePoint FAQ list.
