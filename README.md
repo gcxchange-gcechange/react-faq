@@ -75,13 +75,15 @@ If you want to try on a real environment, open:
 
 - Create a FAQ List in SharePoint.
 - Create the below fields:
-- `Title` field can be considered as "Question" field.
 
 Column Name|Field Type
 -------|----
-`Title`|Single line of text
-`Answer`|Multiple lines of text
-`Category`|Single line of text
+`QuestionEN`|Single line of text
+`QuestionFR`|Single line of text
+`AnswerEN`|Multiple lines of text
+`AnswerFR`|Multiple lines of text
+`CategoryNameEN`|Single line of text
+`CategoryNameFR`|Single line of text
 `CategorySortOrder`|Number
 `QuestionSortOrder`|Number
 
