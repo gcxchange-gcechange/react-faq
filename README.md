@@ -16,7 +16,7 @@ extensions:
 copy of: https://github.com/pnp/sp-dev-fx-webparts/tree/master/samples/react-faqapp
 # Frequently Asked Questions App
 ## Update
-- We change the color palette of the design to blue. 
+- The layout has been change. 
 - Add the ability to navigate through the faq using keybord.
 - Adding french text to the list.
 - Now, the faq work with a different sharepoint list(see below).
