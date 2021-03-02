@@ -102,8 +102,10 @@ Column Name|Field Type
 
 <img src="https://telemetry.sharepointpnp.com/sp-dev-fx-webparts/samples/react-FAQApp" />
 
+---
+
 copie de: https://github.com/pnp/sp-dev-fx-webparts/tree/master/samples/react-faqapp
-# Frequently Asked Questions App
+# Application de foire aux questions (FAQ)
 ## Mise à jour
 - La mise en page a été modifiée.
 - Il est désormais possible de naviguer dans la FAQ à l’aide d’un clavier.
