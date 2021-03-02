@@ -21,8 +21,8 @@ copy of: https://github.com/pnp/sp-dev-fx-webparts/tree/master/samples/react-faq
 - Adding french text to the list.
 - Now, the faq work with a different sharepoint list(see below).
 ## Summary
-- This Web Part allows users to create Frequently Asked Questions(Faq App) in modern and classic SharePoint pages.
-- This webpart allows to search within questions and answers which are stored in a SharePoint FAQ list.
+- This Web Part allows users to create Frequently Asked Questions (FAQ App) in modern and classic SharePoint pages.
+- This webpart allows users to search within questions and answers which are stored in a SharePoint FAQ list.
 - "React-autosuggest and react-accessible-accordion" react packages are used for the search and accordion control.
 
 ![Web part preview](assets/FAQWebpart.png)
@@ -92,31 +92,16 @@ Column Name|Field Type
 
 ## Features
 
-- This Web Part allows users to create Frequently Asked Questions(FAQ App) in modern and classic SharePoint pages.
+- This Web Part allows users to create Frequently Asked Questions (FAQ App) in modern and classic SharePoint pages.
 - An accordion layout is used to make it easy to browse through different questions.
 - Expand answers to your most frequent questions.
 - Include text, links, images in your answers.
 - A search bar to make your FAQ accordion searchable.
-- This webpart allows to search within questions and answers which are stored in a SharePoint FAQ list.
+- This webpart allows users to search within questions and answers which are stored in a SharePoint FAQ list.
 - Sorting is enabled on both the category & Question
 
 <img src="https://telemetry.sharepointpnp.com/sp-dev-fx-webparts/samples/react-FAQApp" />
 
----
-Type de page : échantillon
-Produits :
-- office-sp
-Langages :
-- javascript
-- typescript
-extensions:
-  Type de contenu : échantillon
-  technologies:
-  - SharePoint Framework
-  plateformes:
-  - react
-  Date de création: 04/25/2017 12:00:00 AM
----
 copie de: https://github.com/pnp/sp-dev-fx-webparts/tree/master/samples/react-faqapp
 # Frequently Asked Questions App
 ## Mise à jour
