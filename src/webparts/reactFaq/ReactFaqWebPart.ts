@@ -4,7 +4,8 @@ import { Version } from '@microsoft/sp-core-library';
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import {
   IPropertyPaneConfiguration,
-  PropertyPaneTextField
+  PropertyPaneTextField,
+  PropertyPaneDropdown
 } from '@microsoft/sp-property-pane';
 
 import * as strings from 'ReactFaqWebPartStrings';
@@ -13,6 +14,7 @@ import { IReactFaqProps } from './components/IReactFaqProps';
 
 export interface IReactFaqWebPartProps {
   listName:string;
+  prefLang: string;
 }
 
 export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebPartProps> {
@@ -22,7 +24,8 @@ export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebP
       ReactFaq,
       {
         listName:this.properties.listName,
-        ServiceScope: this.context.serviceScope
+        ServiceScope: this.context.serviceScope,
+        prefLang: this.properties.prefLang,
       }
     );
 
@@ -50,7 +53,14 @@ export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebP
               groupFields: [
                 PropertyPaneTextField('listName', {
                   label: strings.ListNameFieldLabel
-                })
+                }),
+                PropertyPaneDropdown('prefLang', {
+                  label: 'Preferred Language',
+                  options: [
+                    { key: 'account', text: 'Account' },
+                    { key: 'en-us', text: 'English' },
+                    { key: 'fr-fr', text: 'Français' }
+                  ]})
               ]
             }
           ]

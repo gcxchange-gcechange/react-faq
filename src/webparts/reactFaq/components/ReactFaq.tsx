@@ -8,8 +8,8 @@ import Autosuggest from 'react-autosuggest';
 import { FaqServices } from '../../../services/FaqServices';
 import ReactHtmlParser from 'react-html-parser';
 
-import * as strings from "ReactFaqWebPartStrings";
-
+//import * as strings from "ReactFaqWebPartStrings";
+import { SelectLanguage } from './SelectLanguage';
 
 import {
   Accordion,
@@ -49,6 +49,8 @@ export interface IFaqState {
 export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState> {
 
   private faqServicesInstance: IFaqServices;
+
+  public strings = SelectLanguage(this.props.prefLang);
 
   constructor(props) {
     super(props);
@@ -222,7 +224,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       return "";
     }
     else {
-      return (strings.Lang == "FR" ? suggestion.QuestionFR : suggestion.QuestionEN);
+      return (this.strings.Lang == "FR" ? suggestion.QuestionFR : suggestion.QuestionEN);
     }
   }
 
@@ -240,7 +242,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     public renderSuggestion = (suggestion) => {
       return (
         <div>
-          {(strings.Lang =="FR" ? suggestion.QuestionFR : suggestion.QuestionEN)}
+          {(this.strings.Lang =="FR" ? suggestion.QuestionFR : suggestion.QuestionEN)}
         </div>
       );
     }
@@ -590,14 +592,14 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
     // Autosuggest will pass through all these props to the input.
     const inputProps = {
-      placeholder: strings.placeholderSearch,
+      placeholder: this.strings.placeholderSearch,
       value,
       onChange: this.onChange,
       id: 'txtSearchBox',
-      'aria-label': strings.searchLabel
+      'aria-label': this.strings.searchLabel
     };
 
-    const userLang = strings.Lang;
+    const userLang = this.strings.Lang;
 
     return (
       <div className={`container`}>
@@ -641,8 +643,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                                 onClick={
                                   event => this.loadMoreEvent(event)
                                 }>
-                                <FontAwesomeIcon aria-label={strings.iconPlusLabel} icon={fontawesome.faPlusSquare} size="1x" data-id={allFaq.Id} className={"plusminusImg"} />
-                                <FontAwesomeIcon aria-label={strings.iconMinusLabel} icon={fontawesome.faMinusSquare} size="1x" data-id={allFaq.Id} className={"plusminusImg hideDiv"} />
+                                <FontAwesomeIcon aria-label={this.strings.iconPlusLabel} icon={fontawesome.faPlusSquare} size="1x" data-id={allFaq.Id} className={"plusminusImg"} />
+                                <FontAwesomeIcon aria-label={this.strings.iconMinusLabel} icon={fontawesome.faMinusSquare} size="1x" data-id={allFaq.Id} className={"plusminusImg hideDiv"} />
                                 <span tabIndex={0} onKeyUp={event => this.loadMoreEventFromKeybord(event)} className="acc-span-text" data-id={allFaq.Id}>{(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}</span>
                                 <div className="hideDiv">
                                   <div className="acc-answer">
