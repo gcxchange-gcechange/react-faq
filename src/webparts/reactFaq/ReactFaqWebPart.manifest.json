@@ -17,7 +17,7 @@
   "preconfiguredEntries": [{
     "groupId": "5c03119e-3074-46fd-976b-c60198311f70", // Other
     "group": { "default": "Other" },
-    "title": { "default": "react-faq" },
+    "title": { "default": "FAQs" },
     "description": { "default": "react-faq description" },
     "officeFabricIconFontName": "Page",
     "properties": {
