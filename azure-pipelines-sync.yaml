@@ -19,4 +19,4 @@ steps:
   env:
     PAT: $(PAT)
     REPO_NAME: "react-faq"
-  displayName: 'Sync repo
+  displayName: 'Sync repo'
