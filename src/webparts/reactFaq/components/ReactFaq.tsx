@@ -8,6 +8,8 @@ import Autosuggest from 'react-autosuggest';
 import { FaqServices } from '../../../services/FaqServices';
 import ReactHtmlParser from 'react-html-parser';
 
+
+
 //import * as strings from "ReactFaqWebPartStrings";
 import { SelectLanguage } from './SelectLanguage';
 
@@ -23,6 +25,7 @@ import {
 import './index.css';
 import ErrorBoundary from './ErrorBoundary';
 import './reactAccordion.css';
+import { Icon } from 'office-ui-fabric-react';
 
 
 export interface IFaqState {
@@ -103,9 +106,9 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
   public onChange = (event, { newValue }, method) => {
     if(method === "enter"){
-      console.log('enter')
+      console.log('enter');
     }else{
-      console.log("not enter")
+      console.log("not enter");
     }
 
     if (newValue != "") {
@@ -122,27 +125,27 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
   }
 
   public onSuggestionSelected = (FaqData, event, method) => {
-    var currentTargetText = ""
+    var currentTargetText = "";
     if(method.method ==="enter"){
-      console.log("enter"+JSON.stringify(method))
+      console.log("enter"+JSON.stringify(method));
       currentTargetText = method.suggestionValue;
     }
     else{
-      console.log("click")
+      console.log("click");
       currentTargetText = event.currentTarget.innerText;
     }
 
-    console.log("current "+currentTargetText)
+    console.log("current "+currentTargetText);
     const FaqFilteredData = this.filterByValue(FaqData, currentTargetText);
     if (FaqFilteredData) {
-      console.log("faqdata exist"+ FaqFilteredData.length)
+      console.log("faqdata exist"+ FaqFilteredData.length);
       if (FaqFilteredData.length > 0) {
         var autoSuggestTextbox = document.getElementById("txtSearchBox") as HTMLTextAreaElement;
         autoSuggestTextbox.value = currentTargetText;
         autoSuggestTextbox.blur();
-        console.log(autoSuggestTextbox.value)
+        console.log(autoSuggestTextbox.value);
         let FaqId = FaqFilteredData[0].Id;
-        console.log(FaqId)
+        console.log(FaqId);
         let FaqCategory = FaqFilteredData[0].CategoryNameEN;
         var catData = [];
         catData.push(FaqCategory);
@@ -248,8 +251,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
 
     public setNodeValues = () => {
-      var SPCanvasFirstParent = (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.offsetHeight : 0;
-      var SPCanvasSecondParent = (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.parentElement.offsetHeight : 0;
+      var SPCanvasFirstParent = (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.offsetHeight : 0;
+      var SPCanvasSecondParent = (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.parentElement.offsetHeight : 0;
       this.setState({
         actualCanvasContentHeight: SPCanvasFirstParent,
         actualCanvasWrapperHeight: SPCanvasSecondParent
@@ -318,10 +321,11 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         });
         return result;
       }
+    //categories
 
       public distinct(items, prop) {
-        var unique = [];
-        var distinctItems = [];
+        let unique = [];
+        let distinctItems = [];
         for (const item of items) {
           if (unique[item[prop]] === undefined) {
             distinctItems.push(item);
@@ -362,51 +366,66 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       public loadMoreEventFromKeybord(event: any): void{
         //Only if enter press
         if (event.keyCode === 13) {
-        this.loadMoreEvent(event)
+        this.loadMoreEvent(event);
         }
       }
 
       public loadMoreEvent(event: any): void {
+        // debugger
 
-        var clickedId = event.target.getAttribute('data-id');
+        let clickedId = event.target.getAttribute('data-id');
         console.log('clicked - ' + clickedId + ' ' + event.target);
 
-        console.log(event.target.nodeName)
-        if (event.target.nodeName == "SPAN") {
-          if (event.target.nextElementSibling.classList.contains("hideDiv")) {
-            event.target.nextElementSibling.classList.remove("hideDiv");
-            try {
-              if (event.currentTarget.children[0].classList != undefined) {
-                event.currentTarget.children[0].classList.add("hideDiv");
-              }
-              else {
-                // IE11 does not implement classList on <svg>
-                let appliedClasses = event.currentTarget.children[0].getAttribute("class") || "";
-                appliedClasses = appliedClasses.split(" ").indexOf("hideDiv") == -1
-                  ? appliedClasses + " hideDiv"
-                  : appliedClasses;
-                event.currentTarget.children[0].setAttribute('class', appliedClasses);
-              }
+        console.log("EVENT TARGET NODENAME",event.target.nodeName);
 
-              if (event.currentTarget.children[1].classList != undefined) {
+        //if click on TEXT which is a SPAN //
+        if (event.target.nodeName === "SPAN") {
+
+          //1st nested condition//
+          //if chevron up  and the next sibling Icon chevdown contain hideDiv we removed it - acc-answer div
+          if (event.target.nextElementSibling.classList.contains("hideDiv")) {
+            console.log("NEXT sibling", event.target.nextElementSibling.className);
+            event.target.nextElementSibling.classList.remove("hideDiv");
+
+            try {
+                //if it exist we remove hideDiv to classList plusminusImg root 119(chevronup)//
+              if (event.currentTarget.children[0].classList !== undefined) {
+                console.log("CHILD [0]",event.currentTarget.children[0].classList);
+                event.currentTarget.children[0].classList.add("hideDiv");
+
+              }
+              // else {
+              //   // IE11 does not implement classList on <svg>
+              //   let appliedClasses = event.currentTarget.children[0].getAttribute("class") || "";
+              //   console.log("appliedClass", appliedClasses);
+              //   appliedClasses = appliedClasses.split(" ").indexOf("hideDiv") === -1
+              //     ? appliedClasses + " hideDiv"
+              //     : appliedClasses;
+              //   event.currentTarget.children[0].setAttribute('class', appliedClasses);
+              // }
+               //if it exist we remove hideDiv to classList plusminusImg root 119(chevronup) hideDiv//
+              if (event.currentTarget.children[1].classList !== undefined) {
+                console.log("Child[1]", event.currentTarget.children[1].classList);
                 event.currentTarget.children[1].classList.remove("hideDiv");
               }
-              else {
-                // IE11 does not implement classList on <svg>
-                let appliedClassesII = event.currentTarget.children[1].getAttribute("class") || "";
-                appliedClassesII = appliedClassesII.split(" ").indexOf("hideDiv") != -1
-                  ? appliedClassesII.replace(" hideDiv", "")
-                  : appliedClassesII + " hideDiv";
-                event.currentTarget.children[1].setAttribute('class', appliedClassesII);
-              }
-              event.currentTarget.children[3].removeAttribute("style");
+              // else {
+              //   // IE11 does not implement classList on <svg>
+              //   let appliedClassesII = event.currentTarget.children[1].getAttribute("class") || "";
+              //   appliedClassesII = appliedClassesII.split(" ").indexOf("hideDiv") != -1
+              //     ? appliedClassesII.replace(" hideDiv", "")
+              //     : appliedClassesII + " hideDiv";
+              //   event.currentTarget.children[1].setAttribute('class', appliedClassesII);
+              // }
+              // event.currentTarget.children[3].removeAttribute("style");
+              // console.log("CHILD[3]", event.currentTarget.children[3].classList);
             }
-            catch (e) { }
-          }
-          else {
+            catch (e) { console.log("error",e);}
+          } else {
+            //this hides the div with the answer classList hideDiv//
             event.target.nextElementSibling.classList.add("hideDiv");
+            console.log("afterSibling", event.target.nextElementSibling.classList);
             try {
-              if (event.currentTarget.children[1].classList != undefined) {
+              if (event.currentTarget.children[1].classList !== undefined) {
                 event.currentTarget.children[1].classList.add("hideDiv");
               }
               else {
@@ -432,113 +451,124 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
               event.currentTarget.children[3].removeAttribute("style");
             }
             catch (e) { }
-          }
+          };
         }
         else {
-          if (event.target.nodeName == "path") {
-            if (event.currentTarget.children[1] != undefined) {
+          if (event.target.nodeName === "I") {
+            //currentTarget is acc-item
+            if (event.currentTarget.children[1] !== undefined) {
+              console.log("CHild 1Name",event.currentTarget.className);
+              console.log("CHild 1",event.currentTarget.children);
               event.currentTarget.children[1].classList.add("hideDiv");
               event.currentTarget.children[0].classList.add("hideDiv");
+              event.currentTarget.children[3].classList.remove("hideDiv");
             }
-            else {
-              // IE11 does not implement classList on <svg>
-              let appliedClasses = event.currentTarget.children[0].getAttribute("class") || "";
-              appliedClasses = appliedClasses + " hideDiv";
-              event.currentTarget.children[0].setAttribute('class', appliedClasses);
-              let appliedClassesII = event.currentTarget.children[1].getAttribute("class") || "";
-              appliedClassesII = appliedClassesII + " hideDiv";
-              event.currentTarget.children[1].setAttribute('class', appliedClassesII);
+        //     else {
+        //       // IE11 does not implement classList on <svg>
+        //       let appliedClasses = event.currentTarget.children[0].getAttribute("class") || "";
+        //       appliedClasses = appliedClasses + " hideDiv";
+        //       event.currentTarget.children[0].setAttribute('class', appliedClasses);
+        //       let appliedClassesII = event.currentTarget.children[1].getAttribute("class") || "";
+        //       appliedClassesII = appliedClassesII + " hideDiv";
+        //       event.currentTarget.children[1].setAttribute('class', appliedClassesII);
+        //     }
+            if (event.target.parentElement.getAttribute('data-icon') === "chevrondown") {
+              console.log("CD",  event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.className);
+              event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.classList.add("hideDiv");
             }
-            if (event.target.parentElement.getAttribute('data-icon') == "plus-square") {
-              event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv");
-
-              if (event.currentTarget.children[1].classList != undefined) {
+              if (event.currentTarget.children[1].classList !== undefined) {
                 event.currentTarget.children[1].classList.remove("hideDiv");
               }
-              else {
-                // IE11 does not implement classList on <svg>
-                let appliedClassesII = event.currentTarget.children[1].getAttribute("class") || "";
-                appliedClassesII = appliedClassesII.split(" ").indexOf("hideDiv") != -1
-                  ? appliedClassesII.replace(" hideDiv", "")
-                  : appliedClassesII + " hideDiv";
-                event.currentTarget.children[1].setAttribute('class', appliedClassesII);
-              }
-            }
-            else {
-              event.target.parentElement.nextElementSibling.nextElementSibling.classList.add("hideDiv");
-              event.target.parentElement.nextElementSibling.nextElementSibling.removeAttribute("style");
-               if (event.currentTarget.children[0].classList != undefined) {
-                event.currentTarget.children[0].classList.remove("hideDiv");
-              }
-              else {
-                // IE11 does not implement classList on <svg>
-                let appliedClassesII = event.currentTarget.children[0].getAttribute("class") || "";
-                appliedClassesII = appliedClassesII.split(" ").indexOf("hideDiv") != -1
-                  ? appliedClassesII.replace(" hideDiv", "")
-                  : appliedClassesII + " hideDiv";
-                event.currentTarget.children[0].setAttribute('class', appliedClassesII);
-              }
-            }
+        //       else {
+        //         // IE11 does not implement classList on <svg>
+        //         let appliedClassesII = event.currentTarget.children[1].getAttribute("class") || "";
+        //         appliedClassesII = appliedClassesII.split(" ").indexOf("hideDiv") != -1
+        //           ? appliedClassesII.replace(" hideDiv", "")
+        //           : appliedClassesII + " hideDiv";
+        //         event.currentTarget.children[1].setAttribute('class', appliedClassesII);
+        //       }
+        //     }
+        //     else {
+        //       event.target.parentElement.nextElementSibling.nextElementSibling.classList.add("hideDiv");
+        //       event.target.parentElement.nextElementSibling.nextElementSibling.removeAttribute("style");
+        //        if (event.currentTarget.children[0].classList != undefined) {
+        //         event.currentTarget.children[0].classList.remove("hideDiv");
+        //       }
+        //       else {
+        //         // IE11 does not implement classList on <svg>
+        //         let appliedClassesII = event.currentTarget.children[0].getAttribute("class") || "";
+        //         appliedClassesII = appliedClassesII.split(" ").indexOf("hideDiv") != -1
+        //           ? appliedClassesII.replace(" hideDiv", "")
+        //           : appliedClassesII + " hideDiv";
+        //         event.currentTarget.children[0].setAttribute('class', appliedClassesII);
+        //       }
+        //     }
           }
-          else if (event.target.nodeName == "svg") {
-           if (event.target.classList != undefined) {
+          //Conditions for the CHEVRON Icon//
+          else if (event.target.nodeName === "I") {
+            console.log("THIS IS I", event.target.nextElementSibling);
+
+           if (event.target.classList !== undefined) {
+            console.log(event.target.classList);
               event.target.classList.add("hideDiv");
             }
-            else {
-              // IE11 does not implement classList on <svg>
-              let appliedClasses = event.target.getAttribute("class") || "";
-              appliedClasses = appliedClasses + " hideDiv";
-              event.target.setAttribute('class', appliedClasses);
-            }
-            //alert('path');
-            if (event.target.getAttribute('data-icon') == "plus-square") {
+        //     else {
+        //       // IE11 does not implement classList on <svg>
+        //       let appliedClasses = event.target.getAttribute("class") || "";
+        //       appliedClasses = appliedClasses + " hideDiv";
+        //       event.target.setAttribute('class', appliedClasses);
+        //     }
+        //     alert('path');
+            if (event.target.getAttribute('data-icon') === "chevrondown") {
+              console.log('another HI', event.target.nextElementSibing.className);
               event.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv");
               event.target.nextElementSibling.nextElementSibling.nextElementSibling.focus;
-              //event.target.nextElementSibling.classList.remove("hideDiv");
+        //       //event.target.nextElementSibling.classList.remove("hideDiv");
 
-              if (event.target.nextElementSibling.classList != undefined) {
-                console.log("here")
-                event.target.nextElementSibling.classList.remove("hideDiv");
-                event.target.nextElementSibling.focus;
-              }
-              else {
-                // IE11 does not implement classList on <svg>
-                let appliedClassesII = event.target.nextElementSibling.getAttribute("class") || "";
-                appliedClassesII = appliedClassesII.split(" ").indexOf("hideDiv") != -1
-                  ? appliedClassesII.replace(" hideDiv", "")
-                  : appliedClassesII + " hideDiv";
-                event.target.nextElementSibling.setAttribute('class', appliedClassesII);
-              }
+        //       if (event.target.nextElementSibling.classList !== undefined) {
+        //         console.log("here");
+        //         event.target.nextElementSibling.classList.remove("hideDiv");
+        //         event.target.nextElementSibling.focus;
+        //       }
+        //       else {
+        //         // IE11 does not implement classList on <svg>
+        //         let appliedClassesII = event.target.nextElementSibling.getAttribute("class") || "";
+        //         appliedClassesII = appliedClassesII.split(" ").indexOf("hideDiv") !== -1
+        //           ? appliedClassesII.replace(" hideDiv", "")
+        //           : appliedClassesII + " hideDiv";
+        //         event.target.nextElementSibling.setAttribute('class', appliedClassesII);
+        //       }
             }
-            else {
-              event.target.nextElementSibling.nextElementSibling.classList.add("hideDiv");
-              event.target.nextElementSibling.nextElementSibling.removeAttribute("style");
-              if (event.target.previousElementSibling.classList != undefined) {
-                event.target.previousElementSibling.classList.remove("hideDiv");
-              }
-              else {
-                // IE11 does not implement classList on <svg>
-                let appliedClassesII = event.target.previousElementSibling.getAttribute("class") || "";
-                appliedClassesII = appliedClassesII.split(" ").indexOf("hideDiv") != -1
-                  ? appliedClassesII.replace(" hideDiv", "")
-                  : appliedClassesII + " hideDiv";
-                event.target.previousElementSibling.setAttribute('class', appliedClassesII);
-              }
-            }
+        //     else {
+        //       event.target.nextElementSibling.nextElementSibling.classList.add("hideDiv");
+        //       event.target.nextElementSibling.nextElementSibling.removeAttribute("style");
+        //       if (event.target.previousElementSibling.classList !== undefined) {
+        //         event.target.previousElementSibling.classList.remove("hideDiv");
+        //       }
+        //       else {
+        //         // IE11 does not implement classList on <svg>
+        //         let appliedClassesII = event.target.previousElementSibling.getAttribute("class") || "";
+        //         appliedClassesII = appliedClassesII.split(" ").indexOf("hideDiv") != -1
+        //           ? appliedClassesII.replace(" hideDiv", "")
+        //           : appliedClassesII + " hideDiv";
+        //         event.target.previousElementSibling.setAttribute('class', appliedClassesII);
+        //       }
+        //     }
 
-          }
-          else {
-            if (event.target.getAttribute('data-icon') == "plus-square") {
-              event.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv");
-              event.target.nextElementSibling.classList.remove("hideDiv");
-              event.target.classList.add("hideDiv");
-            }
-            else {
-              event.target.nextElementSibling.nextElementSibling.classList.add("hideDiv");
-              event.target.previousElementSibling.classList.add("hideDiv");
-              event.target.classList.add("hideDiv");
-              event.target.removeAttribute("style");
-            }
+        //   }
+        //   else {
+        //     if (event.target.getAttribute('data-icon') === "chevronup") {
+        //       console.log('HI', event.target.getElementsByTagName);
+        //       event.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv");
+        //       event.target.nextElementSibling.classList.remove("hideDiv");
+        //       event.target.classList.add("hideDiv");
+        //     }
+        //     else {
+        //       event.target.nextElementSibling.nextElementSibling.classList.add("hideDiv");
+        //       event.target.previousElementSibling.classList.add("hideDiv");
+        //       event.target.classList.add("hideDiv");
+        //       event.target.removeAttribute("style");
+        //     }
           }
         }
         if (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) {
@@ -556,7 +586,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       }
 
       public setFaqWebPartHeightDynamic = () => {
-        if (this.state.actualCanvasContentHeight == 0) {
+        if (this.state.actualCanvasContentHeight === 0) {
           this.setNodeValues();
         }
         else {
@@ -565,7 +595,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       }
 
       public accordionOnchange = () => {
-        if (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) {
+        if (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) {
           this.setFaqWebPartHeightDynamic();
         }
       }
@@ -626,11 +656,11 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
               {uniqueBC.map((item) => (
                 <div>
                   {this.distinct(FaqData, "CategoryNameEN").map((allCat) => (
-                    <div className={`acc-${allCat.CategoryNameEN} accordeonBlock`}>
-                      <AccordionItem uuid={allCat.CategoryNameEN}>
+                    <div className={`acc-${allCat.CategoryNameEN} accordionBlock`}>
+                      <AccordionItem uuid={allCat.Id}>
                         <AccordionItemHeading>
-                          <AccordionItemButton >
-                            {(userLang == "EN" ? allCat.CategoryNameEN : allCat.CategoryNameFR)}
+                          <AccordionItemButton>
+                            {(userLang === "EN" ? allCat.CategoryNameEN : allCat.CategoryNameFR)}
                           </AccordionItemButton>
                         </AccordionItemHeading>
                         <AccordionItemPanel>
@@ -638,13 +668,15 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                             {FaqData.filter(it => it.CategoryNameEN == allCat.CategoryNameEN).map((allFaq) => (
 
                               <div
-                                className="acc-item"
+                                className={"acc-item"}
                                 data-id={allFaq.Id}
                                 onClick={
                                   event => this.loadMoreEvent(event)
                                 }>
-                                <FontAwesomeIcon aria-label={this.strings.iconPlusLabel} icon={fontawesome.faPlusSquare} size="1x" data-id={allFaq.Id} className={"plusminusImg"} />
-                                <FontAwesomeIcon aria-label={this.strings.iconMinusLabel} icon={fontawesome.faMinusSquare} size="1x" data-id={allFaq.Id} className={"plusminusImg hideDiv"} />
+
+                                <Icon iconName="chevrondown" aria-label={this.strings.iconPlusLabel} data-id={allFaq.Id} className={'plusminusImg'}></Icon>
+                                <Icon iconName="chevronup" aria-label={this.strings.iconMinusLabel} data-id={allFaq.Id} className={"plusminusImg hideDiv"}></Icon>
+
                                 <span tabIndex={0} onKeyUp={event => this.loadMoreEventFromKeybord(event)} className="acc-span-text" data-id={allFaq.Id}>{(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}</span>
                                 <div className="hideDiv">
                                   <div className="acc-answer">
@@ -660,7 +692,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                     </div>
                   ))}
                 </div>
-              ))}
+              )) }
             </Accordion>
           </div>
         </ErrorBoundary>
