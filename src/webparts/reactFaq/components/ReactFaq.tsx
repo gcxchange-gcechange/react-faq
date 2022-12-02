@@ -370,7 +370,37 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         }
       }
 
-      public loadMoreEvent(event: any): void {
+
+      public loadMoreEvent(event: any):void {
+
+        let clickedId = event.target.getAttribute('data-id');
+        console.log('clicked - ' + clickedId + ' ' + event.target);
+
+        console.log("EVENT TARGET NODENAME",event.target.nodeName);
+        if (event.target.nodeName === "I" ) {
+          // debugger
+
+          if (event.currentTarget.children['chevrondown'] !== undefined) {
+          console.log("down",event.currentTarget.children);
+
+          event.currentTarget.children[0].classList.add("hideDiv");
+          event.currentTarget.children[1].classList.remove('hideDiv');
+          event.currentTarget.children[3].classList.remove("hideDiv");
+
+          }
+
+          if (event.currentTarget.children['chevronup'] !== undefined) {
+            console.log("P", event.currentTarget.id);
+            event.currentTarget.children[0].classList.remove("hideDiv");
+            event.currentTarget.children[1].classList.add('hideDiv');
+            event.currentTarget.children[3].classList.add("hideDiv");
+          }
+
+
+        }
+      }
+
+      public loadMoreEvent1(event: any): void {
         // debugger
 
         let clickedId = event.target.getAttribute('data-id');
@@ -455,14 +485,27 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         }
         else {
           if (event.target.nodeName === "I") {
-            //currentTarget is acc-item
-            if (event.currentTarget.children[1] !== undefined) {
-              console.log("CHild 1Name",event.currentTarget.className);
-              console.log("CHild 1",event.currentTarget.children);
-              event.currentTarget.children[1].classList.add("hideDiv");
+            //currentTarget is acc-item child[1] = chevronup
+            //add hideDiv to child[0] = chevdown
+            //remove hideDiv from child[1] so that the chevdown shows
+            //show the DIV answer - remove the hideDiv from child[3] which is the div that wraps the answer
+
+            if (event.currentTarget.children[0]) { //click on chevrondown
+              console.log("CurrentTargetName",event.currentTarget.className);
+              console.log("CHEVUP CHILD 0",event.currentTarget.children[0]);
               event.currentTarget.children[0].classList.add("hideDiv");
+              event.currentTarget.children[1].classList.remove("hideDiv");
               event.currentTarget.children[3].classList.remove("hideDiv");
-            }
+            };
+
+            //event.currentTarget = acc-item
+            //event.currentTarget.child[0]= i.plusminusImg.root-119.hideDiv == chevronDOwn
+            //event.currentTarget.child[1] = i.plusminusImg.root-119 = chevron UP
+            //event.currentTarget.child[2] = span.acc-span-text
+             //event.currentTarget.child[3] = span.acc-span-text
+
+
+
         //     else {
         //       // IE11 does not implement classList on <svg>
         //       let appliedClasses = event.currentTarget.children[0].getAttribute("class") || "";
@@ -472,13 +515,27 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         //       appliedClassesII = appliedClassesII + " hideDiv";
         //       event.currentTarget.children[1].setAttribute('class', appliedClassesII);
         //     }
-            if (event.target.parentElement.getAttribute('data-icon') === "chevrondown") {
-              console.log("CD",  event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.className);
-              event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.classList.add("hideDiv");
-            }
-              if (event.currentTarget.children[1].classList !== undefined) {
-                event.currentTarget.children[1].classList.remove("hideDiv");
-              }
+            // if (event.target.parentElement.getAttribute('data-icon') === "chevrondown") {
+            //   console.log("CD",  event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.className);
+            //   event.target.parentElement.nextElementSibling.nextElementSibling.nextElementSibling.classList.add("hideDiv");
+            // }
+
+            //CHILD 1 = Chevron UP ICON
+
+            // if(event.target.dataset.iconName === "chevronup") {
+            //   console.log("Target", event.target);
+            //   console.log("CurrentTarget", event.currentTarget);
+            //   console.log("child new 1",event.target.previousElementSibling);
+            //   console.log("Parent-firstChild", event.target.className);
+            //   console.log("previousElementSibling", event.target.previousElementSibling.classList);
+            //   event.currentTarget.previousElementSibling.classList.remove("hideDiv");
+            //   event.currentTarget.nextElementSibling.nextElementSibling.classList.add("hideDiv");
+            //   event.currentTarget.parentElement.classList.add("hideDiv");
+            // }
+              // if (event.currentTarget.children[1].classList !== undefined) {
+              //   console.log("REMOVE", event.currentTarget.children[1].classList);
+              //   event.currentTarget.children[1].classList.remove("hideDiv");
+              // }
         //       else {
         //         // IE11 does not implement classList on <svg>
         //         let appliedClassesII = event.currentTarget.children[1].getAttribute("class") || "";
@@ -505,13 +562,13 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         //     }
           }
           //Conditions for the CHEVRON Icon//
-          else if (event.target.nodeName === "I") {
-            console.log("THIS IS I", event.target.nextElementSibling);
+          // else if (event.target.nodeName === "I") {
+          //   console.log("THIS IS I", event.target.nextElementSibling);
 
-           if (event.target.classList !== undefined) {
-            console.log(event.target.classList);
-              event.target.classList.add("hideDiv");
-            }
+          //  if (event.target.classList !== undefined) {
+          //   console.log(event.target.classList);
+          //     event.target.classList.add("hideDiv");
+          //   }
         //     else {
         //       // IE11 does not implement classList on <svg>
         //       let appliedClasses = event.target.getAttribute("class") || "";
@@ -519,10 +576,10 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         //       event.target.setAttribute('class', appliedClasses);
         //     }
         //     alert('path');
-            if (event.target.getAttribute('data-icon') === "chevrondown") {
-              console.log('another HI', event.target.nextElementSibing.className);
-              event.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv");
-              event.target.nextElementSibling.nextElementSibling.nextElementSibling.focus;
+            // if (event.target.getAttribute('data-icon') === "chevrondown") {
+            //   console.log('another HI', event.target.nextElementSibling.nextElementSibling.nextElementSibling.className);
+            //   event.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv");
+            //   event.target.nextElementSibling.nextElementSibling.nextElementSibling.focus;
         //       //event.target.nextElementSibling.classList.remove("hideDiv");
 
         //       if (event.target.nextElementSibling.classList !== undefined) {
@@ -538,7 +595,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         //           : appliedClassesII + " hideDiv";
         //         event.target.nextElementSibling.setAttribute('class', appliedClassesII);
         //       }
-            }
+            // }
         //     else {
         //       event.target.nextElementSibling.nextElementSibling.classList.add("hideDiv");
         //       event.target.nextElementSibling.nextElementSibling.removeAttribute("style");
@@ -556,20 +613,20 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         //     }
 
         //   }
-        //   else {
-        //     if (event.target.getAttribute('data-icon') === "chevronup") {
-        //       console.log('HI', event.target.getElementsByTagName);
-        //       event.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv");
-        //       event.target.nextElementSibling.classList.remove("hideDiv");
-        //       event.target.classList.add("hideDiv");
-        //     }
+          // else {
+            // if (event.target.getAttribute('data-icon') === "chevronup") {
+            //   console.log('HI', event.target.getElementsByTagName);
+            //   event.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv");
+            //   event.target.nextElementSibling.classList.remove("hideDiv");
+            //   event.target.classList.add("hideDiv");
+            // }
         //     else {
         //       event.target.nextElementSibling.nextElementSibling.classList.add("hideDiv");
         //       event.target.previousElementSibling.classList.add("hideDiv");
         //       event.target.classList.add("hideDiv");
         //       event.target.removeAttribute("style");
-        //     }
-          }
+            // }
+          // }
         }
         if (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) {
           this.setFaqWebPartHeightDynamic();
@@ -674,8 +731,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                                   event => this.loadMoreEvent(event)
                                 }>
 
-                                <Icon iconName="chevrondown" aria-label={this.strings.iconPlusLabel} data-id={allFaq.Id} className={'plusminusImg'}></Icon>
-                                <Icon iconName="chevronup" aria-label={this.strings.iconMinusLabel} data-id={allFaq.Id} className={"plusminusImg hideDiv"}></Icon>
+                                <Icon id="chevrondown" iconName="chevrondown" aria-label={this.strings.iconPlusLabel} data-id={allFaq.Id} className={'plusminusImg'}></Icon>
+                                <Icon id="chevronup" iconName="chevronup" aria-label={this.strings.iconMinusLabel} data-id={allFaq.Id} className={"plusminusImg hideDiv"}></Icon>
 
                                 <span tabIndex={0} onKeyUp={event => this.loadMoreEventFromKeybord(event)} className="acc-span-text" data-id={allFaq.Id}>{(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}</span>
                                 <div className="hideDiv">
