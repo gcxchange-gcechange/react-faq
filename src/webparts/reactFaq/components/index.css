@@ -196,13 +196,33 @@ content: "\2796";
 }
 
 
-.accordion__button{
+.accordion__button, .secondLevel{
   /* font-family: 'Tele-GroteskFet'; */
   font-size: 20px;
-  color: #00367c;
+  color:red;
+  /* color: #00367c; */
+  display:flex;
+  align-items: center;
   /* text-transform: capitalize; */
 }
 
+/* .accordion_button2, .secondLevel{
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+} */
+
+.secondLevel{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+
+
+/* .accordion_heading2 {
+  background-color: chartreuse;
+} */
 
 .acc-answer {
   /* font-family: 'Tele-GroteskHal' !important; */
@@ -310,3 +330,8 @@ color: #e20074 !important;
 .acc-answer a span{
 color: #e20074 !important;
 }
+
+.white {
+  background-color: white;
+}
+
