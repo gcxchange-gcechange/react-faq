@@ -11,10 +11,12 @@ import {
 import * as strings from 'ReactFaqWebPartStrings';
 import ReactFaq from './components/ReactFaq';
 import { IReactFaqProps } from './components/IReactFaqProps';
+import { WebPartContext } from '@microsoft/sp-webpart-base';
 
 export interface IReactFaqWebPartProps {
   listName:string;
   prefLang: string;
+
 }
 
 export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebPartProps> {
@@ -26,6 +28,7 @@ export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebP
         listName:this.properties.listName,
         ServiceScope: this.context.serviceScope,
         prefLang: this.properties.prefLang,
+        context: this.context
       }
     );
 

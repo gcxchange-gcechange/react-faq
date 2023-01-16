@@ -2,6 +2,7 @@ import { ServiceScope, ServiceKey } from '@microsoft/sp-core-library';
 import { PageContext } from '@microsoft/sp-page-context';
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { IFaqServices, IFaqProp} from '../interface';
+import { WebPartContext } from '@microsoft/sp-webpart-base';
 
 export class FaqServices implements IFaqServices {
 
@@ -10,11 +11,13 @@ export class FaqServices implements IFaqServices {
   private _spHttpClient: SPHttpClient;
   private _pageContext: PageContext;
   private _currentWebUrl: string;
+  private context: WebPartContext;
 
   constructor(serviceScope: ServiceScope) {
     serviceScope.whenFinished(() => {
       this._spHttpClient = serviceScope.consume(SPHttpClient.serviceKey);
-      this._currentWebUrl = this._pageContext.web.absoluteUrl;
+      // this._currentWebUrl = this._pageContext.web.absoluteUrl;
+      this._currentWebUrl = this.context.pageContext.web.absoluteUrl;
       // this._currentWebUrl = 'https://devgcx.sharepoint.com/sites/Support';
     });
 
