@@ -398,7 +398,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
             if (event.target.nodeName === "I") {
 
-              if (event.target.dataset.iconName  === 'chevrondown') {
+              if (event.target.dataset.iconName  === 'chevronright') {
                 console.log("evenTarget1", event.target.className);
                 console.log("evenTarget3", event.target.nextElementSibling.nextElementSibling.nextElementSibling.className);
                 event.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv"); //answer
@@ -406,7 +406,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                 event.target.classList.add("hideDiv");
               }
 
-              if (event.target.dataset.iconName  === 'chevronup') {
+              if (event.target.dataset.iconName  === 'chevrondown') {
                 event.target.nextElementSibling.nextElementSibling.classList.add("hideDiv");//answer
                 event.target.previousElementSibling.classList.remove("hideDiv"); //chevdown
                 event.target.classList.add("hideDiv");//chevup
@@ -520,8 +520,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                                   event => this.loadMoreEvent(event)
                                 }>
 
-                                <Icon id="chevrondown" iconName="chevrondown" aria-label={this.strings.iconPlusLabel} data-id={allFaq.Id} className={'plusminusImg'}></Icon>
-                                <Icon id="chevronup" iconName="chevronup" aria-label={this.strings.iconMinusLabel} data-id={allFaq.Id} className={"plusminusImg hideDiv"}></Icon>
+                                <Icon id="chevronright" iconName="chevronright" aria-label={this.strings.iconPlusLabel} data-id={allFaq.Id} className={'plusminusImg'}></Icon>
+                                <Icon id="chevrondown" iconName="chevrondown" aria-label={this.strings.iconMinusLabel} data-id={allFaq.Id} className={"plusminusImg hideDiv"}></Icon>
 
                                 <span tabIndex={0} onKeyUp={event => this.loadMoreEventFromKeybord(event)} className="acc-span-text" data-id={allFaq.Id}>{(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}</span>
                                 <div className="hideDiv">
