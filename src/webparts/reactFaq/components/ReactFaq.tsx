@@ -51,7 +51,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
   private faqServicesInstance: IFaqServices;
 
-  public aburl= this.props.context.pageContext.web.absoluteUrl;
+  // public aburl= this.props.context.pageContext.web.absoluteUrl;
+  public aburl = this.props.url;
 
 
   public strings = SelectLanguage(this.props.prefLang);
@@ -128,15 +129,15 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
   public onSuggestionSelected = (FaqData, event, method) => {
     var currentTargetText = "";
     if(method.method ==="enter"){
-      console.log("enter"+JSON.stringify(method));
+      // console.log("enter"+JSON.stringify(method));
       currentTargetText = method.suggestionValue;
     }
     else{
-      console.log("click");
+      // console.log("click");
       currentTargetText = event.currentTarget.innerText;
     }
 
-    console.log("current "+currentTargetText);
+    // console.log("current "+currentTargetText);
     const FaqFilteredData = this.filterByValue(FaqData, currentTargetText);
     if (FaqFilteredData) {
       console.log("faqdata exist"+ FaqFilteredData.length);
@@ -270,8 +271,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
 
     public async loadFaq() {
-
-      console.log("URL",this.aburl);
+      // console.log("URL",this.aburl);
       await this.faqServicesInstance.getFaq(this.props.listName, this.aburl).then((FaqData: IFaqProp[]) => {
         try {
           this.setState(
@@ -404,8 +404,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
             if (event.target.nodeName === "I") {
 
               if (event.target.dataset.iconName  === 'chevronright') {
-                console.log("evenTarget1", event.target.className);
-                console.log("evenTarget3", event.target.nextElementSibling.nextElementSibling.nextElementSibling.className);
+                // console.log("evenTarget1", event.target.className);
+                // console.log("evenTarget3", event.target.nextElementSibling.nextElementSibling.nextElementSibling.className);
                 event.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv"); //answer
                 event.target.nextElementSibling.classList.remove("hideDiv"); //span
                 event.target.classList.add("hideDiv");
@@ -461,7 +461,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       }
 
   public render(): React.ReactElement<IReactFaqProps> {
-    console.log('urlRender', this.aburl);
+
     var uniqueBC = [];
     var FaqData = [];
 
@@ -509,7 +509,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                 <div>
                   {this.distinct(FaqData, "CategoryNameEN").map((allCat) => (
                     <div className={`acc-${allCat.CategoryNameEN} accordeonBlock`}>
-                      <AccordionItem uuid={allCat.CategoryNameEN}>
+                      <AccordionItem uuid={allCat.id}>
                         <AccordionItemHeading>
                           <AccordionItemButton >
                             {(userLang == "EN" ? allCat.CategoryNameEN : allCat.CategoryNameFR)}

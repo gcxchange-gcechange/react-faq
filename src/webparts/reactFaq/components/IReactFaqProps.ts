@@ -6,4 +6,5 @@ export interface IReactFaqProps {
   ServiceScope: ServiceScope;
   prefLang: string;
   context: WebPartContext;
+  url: string;
 }

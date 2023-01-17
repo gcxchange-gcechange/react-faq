@@ -17,6 +17,7 @@ export interface IReactFaqWebPartProps {
   listName:string;
   prefLang: string;
   context: WebPartContext;
+  url:string;
 }
 
 export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebPartProps> {
@@ -28,7 +29,8 @@ export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebP
         listName:this.properties.listName,
         ServiceScope: this.context.serviceScope,
         prefLang: this.properties.prefLang,
-        context: this.context
+        context: this.context,
+        url: this.properties.url
       }
     );
 
@@ -63,7 +65,13 @@ export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebP
                     { key: 'account', text: 'Account' },
                     { key: 'en-us', text: 'English' },
                     { key: 'fr-fr', text: 'Français' }
-                  ]})
+                  ]}),
+
+                PropertyPaneTextField('url', {
+                  label: 'Site Url',
+                  placeholder: 'https://gcxgce.sharepoint.com/sites/SiteName',
+                  value: 'https://gcxgce.sharepoint.com/sites/'
+                })
               ]
             }
           ]
