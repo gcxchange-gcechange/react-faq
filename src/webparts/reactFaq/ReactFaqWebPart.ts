@@ -16,7 +16,7 @@ import { WebPartContext } from '@microsoft/sp-webpart-base';
 export interface IReactFaqWebPartProps {
   listName:string;
   prefLang: string;
-
+  context: WebPartContext;
 }
 
 export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebPartProps> {

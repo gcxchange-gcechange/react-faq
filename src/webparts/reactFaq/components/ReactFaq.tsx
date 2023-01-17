@@ -51,6 +51,9 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
   private faqServicesInstance: IFaqServices;
 
+  public aburl= this.props.context.pageContext.web.absoluteUrl;
+
+
   public strings = SelectLanguage(this.props.prefLang);
 
   constructor(props) {
@@ -267,7 +270,9 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
 
     public async loadFaq() {
-      await this.faqServicesInstance.getFaq(this.props.listName).then((FaqData: IFaqProp[]) => {
+
+      console.log("URL",this.aburl);
+      await this.faqServicesInstance.getFaq(this.props.listName, this.aburl).then((FaqData: IFaqProp[]) => {
         try {
           this.setState(
             {
@@ -456,6 +461,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       }
 
   public render(): React.ReactElement<IReactFaqProps> {
+    console.log('urlRender', this.aburl);
     var uniqueBC = [];
     var FaqData = [];
 
