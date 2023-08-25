@@ -6,7 +6,7 @@ define([], function() {
     "ListNameFieldLabel": "List Name",
     "Lang": "EN",
     "searchLabel":"Search input",
-    "placeholderSearch": "Search",
+    "placeholderSearch": "SearchT",
     "iconPlusLabel": "Plus icon",
     "iconMinusLabel": "Minus icon"
   }
