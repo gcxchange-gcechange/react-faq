@@ -16,7 +16,9 @@ export class FaqServices implements IFaqServices {
       this._spHttpClient = serviceScope.consume(SPHttpClient.serviceKey);
       this._pageContext = serviceScope.consume(PageContext.serviceKey);
       //this._currentWebUrl = this._pageContext.web.absoluteUrl;
-      this._currentWebUrl = 'https://devgcx.sharepoint.com/sites/Support';
+      //this._currentWebUrl = 'https://devgcx.sharepoint.com/sites/Support';
+      this._currentWebUrl = 'https://devgcx.sharepoint.com/teams/VanyTest';
+      console.log("FAQ Webpart URL: "+this._currentWebUrl)
     });
   }
 
@@ -90,12 +92,10 @@ export class FaqServices implements IFaqServices {
                   Modified: collection[i].Modified
                 });
               }
-
             }
             else {
               throw new Error(response.text().toString());
             }
-
             return FaqProp;
           });
         });

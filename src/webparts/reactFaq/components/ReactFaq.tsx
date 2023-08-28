@@ -100,8 +100,6 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       }
     }
   }
-
-
   public onChange = (event, { newValue }, method) => {
     if(method === "enter"){
       console.log('enter');
@@ -115,7 +113,6 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       });
     }
     else {
-
       this.setState({
         originalData: this.state.actualData,
       });
