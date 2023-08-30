@@ -520,7 +520,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                                 <Icon id="chevrondown" iconName="chevrondown" aria-label={this.strings.iconPlusLabel} data-id={allFaq.Id} className={'plusminusImg'}></Icon>
                                 <Icon id="chevronup" iconName="chevronup" aria-label={this.strings.iconMinusLabel} data-id={allFaq.Id} className={"plusminusImg hideDiv"}></Icon>
 
-                                <span tabIndex={0} onKeyUp={event => this.loadMoreEventFromKeybord(event)} className="acc-span-text" data-id={allFaq.Id}>{(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}</span>
+                                <span role="heading" aria-level={3} tabIndex={0} onKeyUp={event => this.loadMoreEventFromKeybord(event)} className="acc-span-text" data-id={allFaq.Id}>{(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}</span>
                                 <div className="hideDiv">
                                   <div className="acc-answer">
                                     {ReactHtmlParser((userLang == "EN" ? allFaq.AnswerEN : allFaq.AnswerFR))}

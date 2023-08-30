@@ -15,9 +15,9 @@ export class FaqServices implements IFaqServices {
     serviceScope.whenFinished(() => {
       this._spHttpClient = serviceScope.consume(SPHttpClient.serviceKey);
       this._pageContext = serviceScope.consume(PageContext.serviceKey);
-      //this._currentWebUrl = this._pageContext.web.absoluteUrl;
+      this._currentWebUrl = this._pageContext.web.absoluteUrl;
       //this._currentWebUrl = 'https://devgcx.sharepoint.com/sites/Support';
-      this._currentWebUrl = 'https://devgcx.sharepoint.com/teams/VanyTest';
+      //this._currentWebUrl = 'https://devgcx.sharepoint.com/teams/VanyTest';
       console.log("FAQ Webpart URL: "+this._currentWebUrl)
     });
   }
