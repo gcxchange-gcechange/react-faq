@@ -1,4 +1,4 @@
-# Name of the application
+# Frequently Asked Questions App
 
 ## Summary
 
