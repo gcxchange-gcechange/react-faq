@@ -24,6 +24,7 @@ import {
 import './index.css';
 import ErrorBoundary from './ErrorBoundary';
 import './reactAccordion.css';
+import styles from './ReactFaq.module.scss';
 
 
 export interface IFaqState {
@@ -477,6 +478,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
     const userLang = this.strings.Lang;
 
+    console.log("FAQData", FaqData);
+
     return (
       <div className={`container`}>
 
@@ -510,10 +513,27 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                           </AccordionItemButton>
                         </AccordionItemHeading>
                         <AccordionItemPanel>
-                          <div className="acc-item-panel">
-                            {FaqData.filter(it => it.CategoryNameEN == allCat.CategoryNameEN).map((allFaq) => (
+                          <Accordion allowMultipleExpanded={true} allowZeroExpanded={true} >
+                            {FaqData.filter(items => items.CategoryNameEN === allCat.CategoryNameEN).map((allFaq, index) => (
+                              <AccordionItem key={index}>
+                                <AccordionItemHeading >
+                                  <AccordionItemButton>
+                                  {(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}
+                                  </AccordionItemButton>
+                                </AccordionItemHeading>
+                                <AccordionItemPanel>
+                                {ReactHtmlParser((userLang == "EN" ? allFaq.AnswerEN : allFaq.AnswerFR))}
+                                </AccordionItemPanel>
 
-                              <div
+                              </AccordionItem>
+                            ))}
+
+                          </Accordion>
+
+                          {/* <div className="acc-item-panel">
+                            {FaqData.filter(it => it.CategoryNameEN == allCat.CategoryNameEN).map((allFaq) => (
+                              <button
+                                aria-expanded="true"
                                 className="acc-item"
                                 data-id={allFaq.Id}
                                 onClick={
@@ -529,10 +549,10 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                                     {ReactHtmlParser((userLang == "EN" ? allFaq.AnswerEN : allFaq.AnswerFR))}
                                   </div>
                                 </div>
-                              </div>
+                              </button>
 
                             ))}
-                          </div>
+                          </div> */}
                         </AccordionItemPanel>
                       </AccordionItem>
                     </div>
