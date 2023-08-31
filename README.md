@@ -11,7 +11,7 @@
 
 ## Prerequisites
 
-- A FAQ List (SharePoint List) should be created wherever the webpart needs to be added with the following fields
+- FAQ List ( a SharePoint list) should be created wherever the webpart needs to be added with the following fields
 
 Column Name|Field Type
 -------|----
@@ -27,15 +27,14 @@ Column Name|Field Type
 - Created List Name should be given in the List Name field in the property pane
 - To test the webpart in the workbench, FAQ List should be created in the home page of the site
 ## API permission
-List of api permission that need to be approve by a sharepoint admin.
-
+None
 ## Version 
 
 Used SharePoint Framework Webpart or Sharepoint Framework Extension 
 
-![SPFx 1.11](https://img.shields.io/badge/SPFx-1.11-green.svg)
+![SPFx 1.8.2](https://img.shields.io/badge/SPFx-1.8.2-green.svg)
 
-![Node.js v10](https://img.shields.io/badge/Node.js-10.22.0-green.svg)
+![Node.js v10](https://img.shields.io/badge/Node.js-10.24.1-green.svg)
 
 ## Applies to
 
@@ -48,8 +47,8 @@ Used SharePoint Framework Webpart or Sharepoint Framework Extension
 
 Version|Date|Comments
 -------|----|--------
-1.0|Dec 9, 2021|Initial release
-1.1|March 25, 2022|Next release
+1.0.0 | April 25, 2020 | Initial release
+1.0.1 | October 30, 2020 | Fix limit 100 items
 
 ## Minimal Path to Awesome
 
