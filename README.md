@@ -51,21 +51,25 @@ Version|Date|Comments
 1.0.1 | October 30, 2020 | Fix limit 100 items
 
 ## Minimal Path to Awesome
-
 - Clone this repository
 - Ensure that you are at the solution folder
+- Ensure the current version of the Node.js (10.22.0)
 - In the command-line run:
   - **npm install**
+  - **gulp clean**
   - **gulp serve**
-- You will need to add your client id and azure function to the `clientId` and `url` classs members at the top of the filename.tsx file.
 - To debug in the front end:
   - go to the `serve.json` file and update `initialPage` to `https://domain-name.sharepoint.com/_layouts/15/workbench.aspx`
   - Run the command **gulp serve**
-- To deploy: in the command-line run
+- To deploy:
+  in the command-line run
+  - **gulp clean**
   - **gulp bundle --ship**
   - **gulp package-solution --ship**
 - Add the webpart to your tenant app store
-- Approve the web API permissions
+- Add the Webpart to a page
+- Create FAQ List (a SharePoint List) with following field in the page content of that page
+- Edit the webpart and add the FAQ ListName in the List Name field of the property pane
 
 ## Disclaimer
 
