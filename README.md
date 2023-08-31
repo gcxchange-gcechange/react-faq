@@ -5,12 +5,14 @@
 - This Web Part allows users to create Frequently Asked Questions (FAQ App) in modern and classic SharePoint pages.
 - This webpart allows users to search within questions and answers which are stored in a SharePoint FAQ list.
 #### FAQ LIST
-![Web part preview](assets/FAQLIST.png)#### FAQ Webpart
+![Web part preview](assets/FAQLIST.png)
+#### FAQ Webpart
 ![Web part preview](assets/FAQWebpart.png)
 
 ## Prerequisites
 
-- A FAQ List (SharePoint List) should be created wherever the webpart needs to be added with the following fields.
+- A FAQ List (SharePoint List) should be created wherever the webpart needs to be added with the following fields
+
 Column Name|Field Type
 -------|----
 `QuestionEN`|Single line of text
