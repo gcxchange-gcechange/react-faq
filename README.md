@@ -2,9 +2,11 @@
 
 ## Summary
 
-Short description of what the webpart do. Give the basic information and feature of the app. 
+- This Web Part allows users to create Frequently Asked Questions (FAQ App) in modern and classic SharePoint pages.
+- This webpart allows users to search within questions and answers which are stored in a SharePoint FAQ list.
 
-_Adding a visualisation is possible. Need to keep in mind that it should only reflect what is provide in the short description. Plus, an short description of the image or animation need to be provide in the alt._
+![FAQ list preview](assets/FAQList.png)
+![Web part preview](assets/FAQWebpart.png)
 
 ## Prerequisites
 
