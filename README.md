@@ -68,7 +68,18 @@ Version|Date|Comments
   - **gulp package-solution --ship**
 - Add the webpart to your tenant app store
 - Add the Webpart to a page
-- Create FAQ List (a SharePoint List) with following field in the page content of that page
+- Create FAQ List (a SharePoint List) with following fields in the page content of that page
+
+Column Name|Field Type
+-------|----
+`QuestionEN`|Single line of text
+`QuestionFR`|Single line of text
+`AnswerEN`|Multiple lines of text
+`AnswerFR`|Multiple lines of text
+`CategoryNameEN`|Single line of text
+`CategoryNameFR`|Single line of text
+`CategorySortOrder`|Number
+`QuestionSortOrder`|Number
 - Edit the webpart and add the FAQ ListName in the List Name field of the property pane
 
 ## Disclaimer
