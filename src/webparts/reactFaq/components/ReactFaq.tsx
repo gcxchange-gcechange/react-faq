@@ -102,8 +102,9 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
   }
 
-
+//this OnChange is for the Search box
   public onChange = (event, { newValue }, method) => {
+    console.log(method)
     if(method === "enter"){
       console.log('enter');
     }else{
@@ -334,94 +335,94 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         );
       }
 
-      public formatDate = (ModifiedDate) => {
-        const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-        const dt = new Date(ModifiedDate);
-        var hours = dt.getHours();
-        var minutes = dt.getMinutes();
-        var secs = dt.getSeconds();
-        var ampm = hours >= 12 ? 'PM' : 'AM';
-        hours = hours % 12;
-        hours = hours ? hours : 12; // the hour '0' should be '12'
-        var strTime = hours + ':' + minutes + ':' + secs + ' ' + ampm;
+      // public formatDate = (ModifiedDate) => {
+      //   const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      //   const dt = new Date(ModifiedDate);
+      //   var hours = dt.getHours();
+      //   var minutes = dt.getMinutes();
+      //   var secs = dt.getSeconds();
+      //   var ampm = hours >= 12 ? 'PM' : 'AM';
+      //   hours = hours % 12;
+      //   hours = hours ? hours : 12; // the hour '0' should be '12'
+      //   var strTime = hours + ':' + minutes + ':' + secs + ' ' + ampm;
 
-        return monthNames[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear() + " " + strTime;
-      }
+      //   return monthNames[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear() + " " + strTime;
+      // }
 
-      public loadMoreEventFromKeybord(event: any): void{
-        //Only if enter press
-        if (event.keyCode === 13) {
-        this.loadMoreEvent(event);
-        }
-      }
+      // public loadMoreEventFromKeybord(event: any): void{
+      //   //Only if enter press
+      //   if (event.keyCode === 13) {
+      //   this.loadMoreEvent(event);
+      //   }
+      // }
 
-      public loadMoreEvent(event: any): void {
+      // public loadMoreEvent(event: any): void {
 
-        var clickedId = event.target.getAttribute('data-id');
-        console.log('clicked - ' + clickedId + ' ' + event.target);
+      //   var clickedId = event.target.getAttribute('data-id');
+      //   console.log('clicked - ' + clickedId + ' ' + event.target);
 
-        console.log(event.target.nodeName);
-        if (event.target.nodeName === "SPAN") {
-          if (event.target.nextElementSibling.classList.contains("hideDiv")) {
-            event.target.nextElementSibling.classList.remove("hideDiv");
+      //   console.log(event.target.nodeName);
+      //   if (event.target.nodeName === "SPAN") {
+      //     if (event.target.nextElementSibling.classList.contains("hideDiv")) {
+      //       event.target.nextElementSibling.classList.remove("hideDiv");
 
-            try {
+      //       try {
 
-              if (event.currentTarget.children[0].classList != undefined) {
-                event.currentTarget.children[0].classList.add("hideDiv");
-              }
-
-
-              if (event.currentTarget.children[1].classList != undefined) {
-                event.currentTarget.children[1].classList.remove("hideDiv");
-              }
-
-            }
-            catch (e) { }
-          }
-          else {
-            event.target.nextElementSibling.classList.add("hideDiv");
-            try {
-              if (event.currentTarget.children[1].classList != undefined) {
-                event.currentTarget.children[1].classList.add("hideDiv");
-              }
-
-              if (event.currentTarget.children[0].classList != undefined) {
-                event.currentTarget.children[0].classList.remove("hideDiv");
-              }
-              event.currentTarget.children[3].removeAttribute("style");
-
-            }
-            catch (e) { }
-          }
-        }
-          else {
-
-            if (event.target.nodeName === "I") {
-
-              if (event.target.dataset.iconName  === 'chevrondown') {
-                console.log("evenTarget1", event.target.className);
-                console.log("evenTarget3", event.target.nextElementSibling.nextElementSibling.nextElementSibling.className);
-                event.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv"); //answer
-                event.target.nextElementSibling.classList.remove("hideDiv"); //span
-                event.target.classList.add("hideDiv");
-              }
-
-              if (event.target.dataset.iconName  === 'chevronup') {
-                event.target.nextElementSibling.nextElementSibling.classList.add("hideDiv");//answer
-                event.target.previousElementSibling.classList.remove("hideDiv"); //chevdown
-                event.target.classList.add("hideDiv");//chevup
-              }
-
-              event.currentTarget.children[3].removeAttribute("style");
+      //         if (event.currentTarget.children[0].classList != undefined) {
+      //           event.currentTarget.children[0].classList.add("hideDiv");
+      //         }
 
 
-          }
-        }
-        if (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) {
-          this.setFaqWebPartHeightDynamic();
-        }
-      }
+      //         if (event.currentTarget.children[1].classList != undefined) {
+      //           event.currentTarget.children[1].classList.remove("hideDiv");
+      //         }
+
+      //       }
+      //       catch (e) { }
+      //     }
+      //     else {
+      //       event.target.nextElementSibling.classList.add("hideDiv");
+      //       try {
+      //         if (event.currentTarget.children[1].classList != undefined) {
+      //           event.currentTarget.children[1].classList.add("hideDiv");
+      //         }
+
+      //         if (event.currentTarget.children[0].classList != undefined) {
+      //           event.currentTarget.children[0].classList.remove("hideDiv");
+      //         }
+      //         event.currentTarget.children[3].removeAttribute("style");
+
+      //       }
+      //       catch (e) { }
+      //     }
+      //   }
+      //     else {
+
+      //       if (event.target.nodeName === "I") {
+
+      //         if (event.target.dataset.iconName  === 'chevrondown') {
+      //           console.log("evenTarget1", event.target.className);
+      //           console.log("evenTarget3", event.target.nextElementSibling.nextElementSibling.nextElementSibling.className);
+      //           event.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv"); //answer
+      //           event.target.nextElementSibling.classList.remove("hideDiv"); //span
+      //           event.target.classList.add("hideDiv");
+      //         }
+
+      //         if (event.target.dataset.iconName  === 'chevronup') {
+      //           event.target.nextElementSibling.nextElementSibling.classList.add("hideDiv");//answer
+      //           event.target.previousElementSibling.classList.remove("hideDiv"); //chevdown
+      //           event.target.classList.add("hideDiv");//chevup
+      //         }
+
+      //         event.currentTarget.children[3].removeAttribute("style");
+
+
+      //     }
+      //   }
+      //   if (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) {
+      //     this.setFaqWebPartHeightDynamic();
+      //   }
+       //}
 
       public dynamicHeight = () => {
         var SPCanvasNode = document.getElementsByClassName("SPCanvas");
@@ -441,11 +442,11 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         }
       }
 
-      public accordionOnchange = () => {
-        if (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) {
-          this.setFaqWebPartHeightDynamic();
-        }
-      }
+      // public accordionOnchange = () => {
+      //   if (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) {
+      //     this.setFaqWebPartHeightDynamic();
+      //   }
+      // }
 
       public includes = (container, value) => {
         var returnValue = false;
@@ -480,6 +481,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
     console.log("FAQData", FaqData);
 
+
     return (
       <div className={`container`}>
 
@@ -500,7 +502,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
           <div className="clearBody">
 
-            <Accordion allowMultipleExpanded={true} allowZeroExpanded={true} onChange={this.accordionOnchange.bind(this)} preExpanded={this.state.filteredCategoryData}
+            <Accordion allowMultipleExpanded={true} allowZeroExpanded={true}
             >
               {uniqueBC.map((item) => (
                 <div>
@@ -513,16 +515,16 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                           </AccordionItemButton>
                         </AccordionItemHeading>
                         <AccordionItemPanel>
-                          <Accordion allowMultipleExpanded={true} allowZeroExpanded={true} >
+                          <Accordion id='secondary_accordion' allowMultipleExpanded={true} allowZeroExpanded={true} >
                             {FaqData.filter(items => items.CategoryNameEN === allCat.CategoryNameEN).map((allFaq, index) => (
-                              <AccordionItem key={index}>
-                                <AccordionItemHeading >
-                                  <AccordionItemButton>
-                                  {(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}
+                              <AccordionItem key={index} >
+                                <AccordionItemHeading>
+                                  <AccordionItemButton  className='secondary_accordion__button'>
+                                    {(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}
                                   </AccordionItemButton>
                                 </AccordionItemHeading>
-                                <AccordionItemPanel>
-                                {ReactHtmlParser((userLang == "EN" ? allFaq.AnswerEN : allFaq.AnswerFR))}
+                                <AccordionItemPanel className='secondary_accordion__panel'>
+                                  <section>{ReactHtmlParser((userLang == "EN" ? allFaq.AnswerEN : allFaq.AnswerFR))}</section>
                                 </AccordionItemPanel>
 
                               </AccordionItem>
