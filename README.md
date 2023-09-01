@@ -3,7 +3,12 @@
 ## Summary
 
 - This Web Part allows users to create Frequently Asked Questions (FAQ App) in modern and classic SharePoint pages.
+- An accordion layout is used to make it easy to browse through different questions.
+- Expand answers to your most frequent questions.
+- Include text, links, images in your answers.
+- A search bar to make your FAQ accordion searchable.
 - This webpart allows users to search within questions and answers which are stored in a SharePoint FAQ list.
+- Sorting is enabled on both the category & Question
 #### FAQ LIST
 ![Web part preview](assets/FAQLIST.png)
 #### FAQ Webpart
