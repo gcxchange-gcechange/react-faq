@@ -16,7 +16,7 @@
 
 ## Prerequisites
 
-- FAQ List ( a SharePoint list) should be created wherever the webpart needs to be added with the following fields
+- FAQ List (a SharePoint list) should be created wherever the webpart needs to be added with the following fields
 
 Column Name|Field Type
 -------|----
