@@ -23,6 +23,10 @@ export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebP
   protected async onInit(): Promise<void> {
     this.strings = SelectLanguage(this.properties.prefLang);
   }
+  public updateWebPart= async () => {
+    this.context.propertyPane.refresh();
+    this.render();
+  }
 
   public render(): void {
     const element: React.ReactElement<IReactFaqProps> = React.createElement(
@@ -31,6 +35,7 @@ export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebP
         listName: this.properties.listName,
         ServiceScope: this.context.serviceScope,
         prefLang: this.properties.prefLang,
+        updateWebPart:this.updateWebPart
       }
     );
 
