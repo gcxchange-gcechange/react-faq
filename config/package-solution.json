@@ -6,9 +6,38 @@
     "version": "1.0.1.4",
     "includeClientSideAssets": true,
     "isDomainIsolated": false,
-    "skipFeatureDeployment": true
+    "skipFeatureDeployment": true,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.17.4"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "react-faq description"
+      },
+      "longDescription": {
+        "default": "react-faq description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "spfxwebparts ReactFaqWebPart Feature",
+        "description": "The feature that activates ReactFaqWebPart from the spfxwebparts solution.",
+        "id": "a3c5e704-6f57-4f19-86ea-3a462c18780e",
+        "version": "1.0.1.4",
+        "componentIds": [
+          "a3c5e704-6f57-4f19-86ea-3a462c18780e"
+        ]
+      }]
   },
   "paths": {
     "zippedPackage": "solution/spfxwebparts.sppkg"
   }
 }
+

@@ -1,12 +1,11 @@
 import * as React from 'react';
 import { IReactFaqProps } from './IReactFaqProps';
 import { IFaqProp, IFaqServices } from '../../../interface';
-import { ServiceScope, ServiceKey, Environment, EnvironmentType } from '@microsoft/sp-core-library';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import * as fontawesome from '@fortawesome/free-solid-svg-icons';
+import { ServiceScope, Environment, EnvironmentType } from '@microsoft/sp-core-library';
 import Autosuggest from 'react-autosuggest';
 import { FaqServices } from '../../../services/FaqServices';
-import ReactHtmlParser from 'react-html-parser';
+//import ReactHtmlParser from 'react-html-parser';
+import parse from 'html-react-parser';
 import { Icon } from 'office-ui-fabric-react';
 
 //import * as strings from "ReactFaqWebPartStrings";
@@ -526,7 +525,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                                 <span tabIndex={0} onKeyUp={event => this.loadMoreEventFromKeybord(event)} className="acc-span-text" data-id={allFaq.Id}>{(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}</span>
                                 <div className="hideDiv">
                                   <div className="acc-answer">
-                                    {ReactHtmlParser((userLang == "EN" ? allFaq.AnswerEN : allFaq.AnswerFR))}
+                                    {parse((userLang == "EN" ? allFaq.AnswerEN : allFaq.AnswerFR))}
                                   </div>
                                 </div>
                               </div>

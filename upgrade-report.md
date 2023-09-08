@@ -150,6 +150,7 @@ Execute the following command:
 npm i -SE @fluentui/react@7.199.1
 ```
 
+
 File: [./package.json:13:3](./package.json)
 
 ### FN002020 @microsoft/rush-stack-compiler-4.5 | Required
@@ -728,6 +729,7 @@ Update tslint.json extends property
   "extends": "./node_modules/@microsoft/sp-tslint-rules/base-tslint.json"
 }
 ```
+
 
 File: [./tslint.json:2:3](./tslint.json)
 

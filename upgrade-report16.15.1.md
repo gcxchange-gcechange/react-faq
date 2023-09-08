@@ -40,6 +40,7 @@ Execute the following command:
 npm i -SE @microsoft/sp-office-ui-fabric-core@1.17.4
 ```
 
+
 File: [./package.json:19:5](./package.json)
 
 ### FN001004 @microsoft/sp-webpart-base | Required
@@ -201,6 +202,7 @@ Update @microsoft/teams-js SDK version in .yo-rc.json
   }
 }
 ```
+
 
 File: [./.yo-rc.json:2:3](./.yo-rc.json)
 
