@@ -1,5 +1,5 @@
 export interface IFaqProp {
-  Id?: Number;
+  Id?: number;
   QuestionEN?: string;
   QuestionFR?: string;
   AnswerEN?: string;
@@ -7,9 +7,9 @@ export interface IFaqProp {
   BusinessCategory?: string;
   CategoryNameEN?: string;
   CategoryNameFR?: string;
-  CategorySortOrder?: Number;
-  QuestionSortOrder?: Number;
+  CategorySortOrder?: number;
+  QuestionSortOrder?: number;
   IsFullRow?: string;
-  expandRow?: Boolean;
+  expandRow?: boolean;
   Modified?: Date;
 }
