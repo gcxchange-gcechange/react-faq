@@ -499,9 +499,9 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
             <Accordion allowMultipleExpanded={true} allowZeroExpanded={true} onChange={this.accordionOnchange.bind(this)} preExpanded={this.state.filteredCategoryData}
             >
               {uniqueBC.map((item,index) => (
-                <div>
+                <div key={index}>
                   {this.distinct(FaqData, "CategoryNameEN").map((allCat,index) => (
-                    <div className={`acc-${allCat.CategoryNameEN} accordeonBlock`}>
+                    <div className={`acc-${allCat.CategoryNameEN} accordeonBlock`} key={index}>
                       <AccordionItem uuid={allCat.CategoryNameEN}>
                         <AccordionItemHeading>
                           <AccordionItemButton >
@@ -512,6 +512,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                           <div className="acc-item-panel">
                             {FaqData.filter(it => it.CategoryNameEN === allCat.CategoryNameEN).map((allFaq,index) => (
                               <div
+                              key={index}
                                 className="acc-item"
                                 data-id={allFaq.Id}
                                 onClick={
