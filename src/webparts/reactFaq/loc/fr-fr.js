@@ -8,7 +8,7 @@ define([], function() {
     Lang: "FR",
     searchLabel: "Entrée de recherche",
     placeholderSearch: "Recherche",
-    iconPlusLabel: "Icon plus",
-    iconMinusLabel: "Icon moins",
+    iconPlusLabel: "Icône plus",
+    iconMinusLabel: "Icône moins",
   };
 });
