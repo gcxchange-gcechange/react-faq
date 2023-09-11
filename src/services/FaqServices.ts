@@ -2,6 +2,7 @@ import { ServiceScope, ServiceKey } from '@microsoft/sp-core-library';
 import { PageContext } from '@microsoft/sp-page-context';
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';
 import { IFaqServices, IFaqProp} from '../interface';
+import { WebPartContext } from '@microsoft/sp-webpart-base';
 
 export class FaqServices implements IFaqServices {
 
@@ -10,20 +11,29 @@ export class FaqServices implements IFaqServices {
   private _spHttpClient: SPHttpClient;
   private _pageContext: PageContext;
   private _currentWebUrl: string;
+  private context: WebPartContext;
+
+
 
   constructor(serviceScope: ServiceScope) {
     serviceScope.whenFinished(() => {
       this._spHttpClient = serviceScope.consume(SPHttpClient.serviceKey);
-      this._currentWebUrl = this._pageContext.web.absoluteUrl;
+      // this._currentWebUrl = this._pageContext.web.absoluteUrl;
+      // this._currentWebUrl = this.context.pageContext.web.absoluteUrl;
+
+
       // this._currentWebUrl = 'https://devgcx.sharepoint.com/sites/Support';
     });
 
   }
 
 
-  public getFaq(listName): Promise<IFaqProp[]> {
+
+
+  public getFaq(listName, url): Promise<IFaqProp[]> {
+
     return new Promise<IFaqProp[]>((resolve: any) => {
-      var ParentDetails = this.getFaqs(listName);
+      var ParentDetails = this.getFaqs(listName, url);
       resolve(ParentDetails);
     });
   }
@@ -60,10 +70,13 @@ export class FaqServices implements IFaqServices {
     return tempOrg;
   }
 
-  public async getFaqs(listName: string): Promise<IFaqProp[]> {
+  public async getFaqs(listName: string, url: string): Promise<IFaqProp[]> {
     try {
       const FaqProp:IFaqProp[] = [];
-      let restUrl: string = this._currentWebUrl;
+      let restUrl: string = url;
+
+      console.log("GETFAQS", url);
+
       //fix: load more than 100 items using top=5000
       restUrl += "/_api/web/lists/getbytitle('" + listName + "')/items?$select=Id,QuestionEN,QuestionFR,AnswerEN,AnswerFR,CategoryNameEN,CategoryNameFR,CategorySortOrder,QuestionSortOrder,Modified&$top=5000";
       return await this._spHttpClient.get(restUrl, SPHttpClient.configurations.v1,

@@ -51,6 +51,10 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
   private faqServicesInstance: IFaqServices;
 
+  // public aburl= this.props.context.pageContext.web.absoluteUrl;
+  public aburl = this.props.url;
+
+
   public strings = SelectLanguage(this.props.prefLang);
 
   constructor(props) {
@@ -125,15 +129,15 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
   public onSuggestionSelected = (FaqData, event, method) => {
     var currentTargetText = "";
     if(method.method ==="enter"){
-      console.log("enter"+JSON.stringify(method));
+      // console.log("enter"+JSON.stringify(method));
       currentTargetText = method.suggestionValue;
     }
     else{
-      console.log("click");
+      // console.log("click");
       currentTargetText = event.currentTarget.innerText;
     }
 
-    console.log("current "+currentTargetText);
+    // console.log("current "+currentTargetText);
     const FaqFilteredData = this.filterByValue(FaqData, currentTargetText);
     if (FaqFilteredData) {
       console.log("faqdata exist"+ FaqFilteredData.length);
@@ -267,7 +271,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
 
     public async loadFaq() {
-      await this.faqServicesInstance.getFaq(this.props.listName).then((FaqData: IFaqProp[]) => {
+      // console.log("URL",this.aburl);
+      await this.faqServicesInstance.getFaq(this.props.listName, this.aburl).then((FaqData: IFaqProp[]) => {
         try {
           this.setState(
             {
@@ -398,15 +403,15 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
             if (event.target.nodeName === "I") {
 
-              if (event.target.dataset.iconName  === 'chevrondown') {
-                console.log("evenTarget1", event.target.className);
-                console.log("evenTarget3", event.target.nextElementSibling.nextElementSibling.nextElementSibling.className);
+              if (event.target.dataset.iconName  === 'chevronright') {
+                // console.log("evenTarget1", event.target.className);
+                // console.log("evenTarget3", event.target.nextElementSibling.nextElementSibling.nextElementSibling.className);
                 event.target.nextElementSibling.nextElementSibling.nextElementSibling.classList.remove("hideDiv"); //answer
                 event.target.nextElementSibling.classList.remove("hideDiv"); //span
                 event.target.classList.add("hideDiv");
               }
 
-              if (event.target.dataset.iconName  === 'chevronup') {
+              if (event.target.dataset.iconName  === 'chevrondown') {
                 event.target.nextElementSibling.nextElementSibling.classList.add("hideDiv");//answer
                 event.target.previousElementSibling.classList.remove("hideDiv"); //chevdown
                 event.target.classList.add("hideDiv");//chevup
@@ -456,6 +461,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       }
 
   public render(): React.ReactElement<IReactFaqProps> {
+
     var uniqueBC = [];
     var FaqData = [];
 
@@ -503,7 +509,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                 <div>
                   {this.distinct(FaqData, "CategoryNameEN").map((allCat) => (
                     <div className={`acc-${allCat.CategoryNameEN} accordeonBlock`}>
-                      <AccordionItem uuid={allCat.CategoryNameEN}>
+                      <AccordionItem uuid={allCat.id}>
                         <AccordionItemHeading>
                           <AccordionItemButton >
                             {(userLang == "EN" ? allCat.CategoryNameEN : allCat.CategoryNameFR)}
@@ -520,8 +526,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                                   event => this.loadMoreEvent(event)
                                 }>
 
-                                <Icon id="chevrondown" iconName="chevrondown" aria-label={this.strings.iconPlusLabel} data-id={allFaq.Id} className={'plusminusImg'}></Icon>
-                                <Icon id="chevronup" iconName="chevronup" aria-label={this.strings.iconMinusLabel} data-id={allFaq.Id} className={"plusminusImg hideDiv"}></Icon>
+                                <Icon id="chevronright" iconName="chevronright" aria-label={this.strings.iconPlusLabel} data-id={allFaq.Id} className={'plusminusImg'}></Icon>
+                                <Icon id="chevrondown" iconName="chevrondown" aria-label={this.strings.iconMinusLabel} data-id={allFaq.Id} className={"plusminusImg hideDiv"}></Icon>
 
                                 <span tabIndex={0} onKeyUp={event => this.loadMoreEventFromKeybord(event)} className="acc-span-text" data-id={allFaq.Id}>{(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}</span>
                                 <div className="hideDiv">
