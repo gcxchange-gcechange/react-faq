@@ -74,22 +74,22 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       actualAccordionHeight: 0
     };
     try {
-      let serviceScope: ServiceScope;
-      serviceScope = this.props.ServiceScope;
+      const serviceScope: ServiceScope= this.props.ServiceScope;      
       if (Environment.type === EnvironmentType.SharePoint || Environment.type === EnvironmentType.ClassicSharePoint) {
         // Mapping to be used when webpart runs in SharePoint.
         this.faqServicesInstance = serviceScope.consume(FaqServices.serviceKey);
       }
       else {
+        console.log("App is not running in Sharepoint Online")
 
       }
-    } catch (error) {
+    } catch (error) {console.log(error)
     }
   }
 
 
   public onHandleChange = (event, value, FaqData) => {
-    if (FaqData.length > 0 && event != undefined) {
+    if (FaqData.length > 0 && event !== undefined) {
       if (value === "") {
         const FaqFilteredData = this.filterByValue(FaqData, value);
         this.setState({ originalData: FaqFilteredData });
@@ -167,7 +167,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
           FaqEle.previousElementSibling.previousSibling.classList.add("hideDiv");
         }
 
-        if (FaqEle.previousElementSibling.classList != undefined) {
+        if (FaqEle.previousElementSibling.classList !== undefined) {
           FaqEle.previousElementSibling.classList.remove("hideDiv");
         }
 
