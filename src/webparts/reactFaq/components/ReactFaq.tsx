@@ -30,15 +30,15 @@ export interface IFaqState {
   originalData: IFaqProp[];
   actualData: IFaqProp[];
   BusinessCategory: any;
-  isLoading: Boolean;
-  errorCause: String;
+  isLoading: boolean;
+  errorCause: string;
   selectedEntity: any;
-  show: Boolean;
+  show: boolean;
   filterData: any;
-  searchValue: String;
+  searchValue: string;
   filteredCategoryData: any;
-  filteredQuestion: String;
-  value: String;
+  filteredQuestion: string;
+  value: string;
   suggestions: any;
   actualCanvasContentHeight: number;
   actualCanvasWrapperHeight: number;
@@ -122,7 +122,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
   }
 
   public onSuggestionSelected = (FaqData, event, method) => {
-    var currentTargetText = "";
+    let currentTargetText = "";
     if(method.method ==="enter"){
       console.log("enter"+JSON.stringify(method));
       currentTargetText = method.suggestionValue;
@@ -137,28 +137,28 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     if (FaqFilteredData) {
       console.log("faqdata exist"+ FaqFilteredData.length);
       if (FaqFilteredData.length > 0) {
-        var autoSuggestTextbox = document.getElementById("txtSearchBox") as HTMLTextAreaElement;
+        const autoSuggestTextbox = document.getElementById("txtSearchBox") as HTMLTextAreaElement;
         autoSuggestTextbox.value = currentTargetText;
         autoSuggestTextbox.blur();
         console.log(autoSuggestTextbox.value);
-        let FaqId = FaqFilteredData[0].Id;
+        const FaqId = FaqFilteredData[0].Id;
         console.log("FAQID",FaqId);
-        let FaqCategory = FaqFilteredData[0].CategoryNameEN;
-        var catData = [];
+        const FaqCategory = FaqFilteredData[0].CategoryNameEN;
+        const catData = [];
         catData.push(FaqCategory);
         this.setState({ filteredCategoryData: catData });
-        var nodElem = 'acc-' + FaqCategory;
-        var node = document.getElementsByClassName(nodElem);
-        var chNode = node[0].children[0].children[0].children[0];
+        const nodElem = 'acc-' + FaqCategory;
+        const node = document.getElementsByClassName(nodElem);
+        const chNode = node[0].children[0].children[0].children[0];
         console.log("CHNODE", chNode);
-        var newAttr = document.createAttribute('aria-expanded');
+        const newAttr = document.createAttribute('aria-expanded');
         newAttr.value = 'true';
         chNode.setAttributeNode(newAttr);
         node[0].children[0].children[1].removeAttribute('hidden');
-        var FaqNode = this.getFaqElement(FaqId);
-        var txtNode = document.getElementById("txtSearchBox");
-        var FaqEle = FaqNode[0];
-        var newAttrII = document.createAttribute('aria-expanded');
+        const FaqNode = this.getFaqElement(FaqId);
+        const txtNode = document.getElementById("txtSearchBox");
+        const FaqEle = FaqNode[0];
+        const newAttrII = document.createAttribute('aria-expanded');
         newAttrII.value = 'true';
         FaqEle.setAttributeNode(newAttrII);
         FaqEle.nextSibling.style.display = 'block';
@@ -172,7 +172,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         }
 
 
-        var txtSibEle = txtNode.nextElementSibling;
+        const txtSibEle = txtNode.nextElementSibling;
         txtSibEle.classList.remove("react-autosuggest__suggestions-container--open");
         FaqEle.scrollIntoView({ behavior: 'smooth' });
 
@@ -193,7 +193,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
 
     public onSuggestionsClearRequested = () => {
-      var autoSuggestTextbox = document.getElementById("txtSearchBox") as HTMLTextAreaElement;
+      const autoSuggestTextbox = document.getElementById("txtSearchBox") as HTMLTextAreaElement;
       if(autoSuggestTextbox.value == ""){
         autoSuggestTextbox.value = "";
         this.setState({
@@ -235,8 +235,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
 
     public setNodeValues = () => {
-      var SPCanvasFirstParent = (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.offsetHeight : 0;
-      var SPCanvasSecondParent = (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.parentElement.offsetHeight : 0;
+      const SPCanvasFirstParent = (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.offsetHeight : 0;
+      const SPCanvasSecondParent = (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.parentElement.offsetHeight : 0;
       this.setState({
         actualCanvasContentHeight: SPCanvasFirstParent,
         actualCanvasWrapperHeight: SPCanvasSecondParent
@@ -253,12 +253,12 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       this.setState({
         actualAccordionHeight: (document.getElementsByClassName("accordion") != undefined && document.getElementsByClassName("accordion").length > 0) ? document.getElementsByClassName("accordion")[0].parentElement.offsetHeight : 0
       });
-      var ua = window.navigator.userAgent;
-      var trident = ua.indexOf('Trident/');
+      const ua = window.navigator.userAgent;
+      const trident = ua.indexOf('Trident/');
 
       if (trident > 0) {
         // IE 11 => return version number
-        var rv = ua.indexOf('rv:');
+        const rv = ua.indexOf('rv:');
         if ((parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10)) < 12) {
           document.getElementById("txtSearchBox").style.paddingTop = '3px';
         }
@@ -283,9 +283,9 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
 
       public categoryAndQuestionSorting = (Data) => {
-        var result = [];
+        const result = [];
         // Get Distinct category for sorting Category
-        var distCate = this.distinct(Data, "CategoryNameEN");
+        const distCate = this.distinct(Data, "CategoryNameEN");
         distCate.sort((c, d) => {
           return c.CategorySortOrder - d.CategorySortOrder;
         });
@@ -307,8 +307,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       }
 
       public distinct(items, prop) {
-        var unique = [];
-        var distinctItems = [];
+        const unique = [];
+        const distinctItems = [];
         for (const item of items) {
           if (unique[item[prop]] === undefined) {
             distinctItems.push(item);
@@ -321,7 +321,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
       public filterByValue = (arrayData, value) => {
           return arrayData.filter(o =>
-          this.includes(o["QuestionEN"].toLowerCase(), value.toLowerCase()) || this.includes(o["AnswerEN"].toLowerCase(), value.toLowerCase()) || this.includes(o["QuestionFR"].toLowerCase(), value.toLowerCase()) || this.includes(o["AnswerFR"].toLowerCase(), value.toLowerCase())
+          this.includes(o.QuestionEN.toLowerCase(), value.toLowerCase()) || this.includes(o.AnswerEN.toLowerCase(), value.toLowerCase()) || this.includes(o.QuestionFR.toLowerCase(), value.toLowerCase()) || this.includes(o.AnswerFR.toLowerCase(), value.toLowerCase())
         );
       }
 
@@ -335,13 +335,13 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       public formatDate = (ModifiedDate) => {
         const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const dt = new Date(ModifiedDate);
-        var hours = dt.getHours();
-        var minutes = dt.getMinutes();
-        var secs = dt.getSeconds();
-        var ampm = hours >= 12 ? 'PM' : 'AM';
+        let hours = dt.getHours();
+        const minutes = dt.getMinutes();
+        const secs = dt.getSeconds();
+        const ampm = hours >= 12 ? 'PM' : 'AM';
         hours = hours % 12;
         hours = hours ? hours : 12; // the hour '0' should be '12'
-        var strTime = hours + ':' + minutes + ':' + secs + ' ' + ampm;
+        const strTime = hours + ':' + minutes + ':' + secs + ' ' + ampm;
 
         return monthNames[dt.getMonth()] + " " + dt.getDate() + ", " + dt.getFullYear() + " " + strTime;
       }
@@ -355,7 +355,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
       public loadMoreEvent(event: any): void {
 
-        var clickedId = event.target.getAttribute('data-id');
+        const clickedId = event.target.getAttribute('data-id');
         console.log('clicked - ' + clickedId + ' ' + event.target);
 
         console.log(event.target.nodeName);
@@ -422,8 +422,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       }
 
       public dynamicHeight = () => {
-        var SPCanvasNode = document.getElementsByClassName("SPCanvas");
-        var accordionNode = document.getElementsByClassName("accordion");
+        const SPCanvasNode = document.getElementsByClassName("SPCanvas");
+        const accordionNode = document.getElementsByClassName("accordion");
         if (SPCanvasNode.length > 0 && accordionNode.length > 0) {
           SPCanvasNode[0].parentElement.style.height = (this.state.actualCanvasContentHeight + (accordionNode[0].parentElement.offsetHeight - this.state.actualAccordionHeight)) + "px";
           SPCanvasNode[0].parentElement.parentElement.style.height = (this.state.actualCanvasWrapperHeight + (accordionNode[0].parentElement.offsetHeight - this.state.actualAccordionHeight)) + "px";
@@ -446,8 +446,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       }
 
       public includes = (container, value) => {
-        var returnValue = false;
-        var pos = container.indexOf(value);
+        let returnValue = false;
+        const pos = container.indexOf(value);
         if (pos >= 0) {
           returnValue = true;
         }
@@ -455,8 +455,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       }
 
   public render(): React.ReactElement<IReactFaqProps> {
-    var uniqueBC = [];
-    var FaqData = [];
+    let uniqueBC = [];
+    let FaqData = [];
 
     if (this.state.originalData.length > 0) {
       FaqData = this.categoryAndQuestionSorting(this.state.originalData);
@@ -519,8 +519,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                                   event => this.loadMoreEvent(event)
                                 }>
 
-                                <Icon id="chevrondown" iconName="chevrondown" aria-label={this.strings.iconPlusLabel} data-id={allFaq.Id} className={'plusminusImg'}></Icon>
-                                <Icon id="chevronup" iconName="chevronup" aria-label={this.strings.iconMinusLabel} data-id={allFaq.Id} className={"plusminusImg hideDiv"}></Icon>
+                                <Icon id="chevrondown" iconName="chevrondown" aria-label={this.strings.iconPlusLabel} data-id={allFaq.Id} className={'plusminusImg'} />
+                                <Icon id="chevronup" iconName="chevronup" aria-label={this.strings.iconMinusLabel} data-id={allFaq.Id} className={"plusminusImg hideDiv"} />
 
                                 <span tabIndex={0} onKeyUp={event => this.loadMoreEventFromKeybord(event)} className="acc-span-text" data-id={allFaq.Id}>{(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}</span>
                                 <div className="hideDiv">
