@@ -76,7 +76,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     try {
       let serviceScope: ServiceScope;
       serviceScope = this.props.ServiceScope;
-      if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
+      if (Environment.type === EnvironmentType.SharePoint || Environment.type === EnvironmentType.ClassicSharePoint) {
         // Mapping to be used when webpart runs in SharePoint.
         this.faqServicesInstance = serviceScope.consume(FaqServices.serviceKey);
       }
@@ -90,7 +90,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
   public onHandleChange = (event, value, FaqData) => {
     if (FaqData.length > 0 && event != undefined) {
-      if (value == "") {
+      if (value === "") {
         const FaqFilteredData = this.filterByValue(FaqData, value);
         this.setState({ originalData: FaqFilteredData });
       }
@@ -108,7 +108,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       console.log("not enter");
     }
 
-    if (newValue != "") {
+    if (newValue !== "") {
       this.setState({
         value: newValue,
       });
@@ -163,7 +163,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         FaqEle.setAttributeNode(newAttrII);
         FaqEle.nextSibling.style.display = 'block';
         FaqEle.nextSibling.removeAttribute('class');
-        if (FaqEle.previousElementSibling.previousSibling.classList != undefined) {
+        if (FaqEle.previousElementSibling.previousSibling.classList !== undefined) {
           FaqEle.previousElementSibling.previousSibling.classList.add("hideDiv");
         }
 
@@ -176,7 +176,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         txtSibEle.classList.remove("react-autosuggest__suggestions-container--open");
         FaqEle.scrollIntoView({ behavior: 'smooth' });
 
-        if (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) {
+        if (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) {
           this.setFaqWebPartHeightDynamic();
         }
 
@@ -194,7 +194,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
     public onSuggestionsClearRequested = () => {
       const autoSuggestTextbox = document.getElementById("txtSearchBox") as HTMLTextAreaElement;
-      if(autoSuggestTextbox.value == ""){
+      if(autoSuggestTextbox.value === ""){
         autoSuggestTextbox.value = "";
         this.setState({
           suggestions: [],
@@ -211,7 +211,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       return "";
     }
     else {
-      return (this.strings.Lang == "FR" ? suggestion.QuestionFR : suggestion.QuestionEN);
+      return (this.strings.Lang === "FR" ? suggestion.QuestionFR : suggestion.QuestionEN);
     }
   }
 
@@ -229,14 +229,14 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     public renderSuggestion = (suggestion) => {
       return (
         <div>
-          {(this.strings.Lang =="FR" ? suggestion.QuestionFR : suggestion.QuestionEN)}
+          {(this.strings.Lang ==="FR" ? suggestion.QuestionFR : suggestion.QuestionEN)}
         </div>
       );
     }
 
     public setNodeValues = () => {
-      const SPCanvasFirstParent = (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.offsetHeight : 0;
-      const SPCanvasSecondParent = (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.parentElement.offsetHeight : 0;
+      const SPCanvasFirstParent = (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.offsetHeight : 0;
+      const SPCanvasSecondParent = (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.parentElement.offsetHeight : 0;
       this.setState({
         actualCanvasContentHeight: SPCanvasFirstParent,
         actualCanvasWrapperHeight: SPCanvasSecondParent
@@ -244,14 +244,14 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
 
     public async componentDidMount() {
-      if (Environment.type == EnvironmentType.SharePoint || Environment.type == EnvironmentType.ClassicSharePoint) {
-        this.loadFaq();
+      if (Environment.type === EnvironmentType.SharePoint || Environment.type === EnvironmentType.ClassicSharePoint) {
+        await this.loadFaq();
       }
       else {
         //await this.loadMockFaq();
       }
       this.setState({
-        actualAccordionHeight: (document.getElementsByClassName("accordion") != undefined && document.getElementsByClassName("accordion").length > 0) ? document.getElementsByClassName("accordion")[0].parentElement.offsetHeight : 0
+        actualAccordionHeight: (document.getElementsByClassName("accordion") !== undefined && document.getElementsByClassName("accordion").length > 0) ? document.getElementsByClassName("accordion")[0].parentElement.offsetHeight : 0
       });
       const ua = window.navigator.userAgent;
       const trident = ua.indexOf('Trident/');
@@ -293,7 +293,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         //Sorting the FQA as per CategorySortOrder
         distCate.forEach((distCateItem) => {
           Data.map((item) => {
-            if (distCateItem.CategoryNameEN.toLowerCase() == item.CategoryNameEN.toLowerCase()) {
+            if (distCateItem.CategoryNameEN.toLowerCase() === item.CategoryNameEN.toLowerCase()) {
               result.push(item);
             }
           });
@@ -328,7 +328,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       public getFaqElement = (FaqId) => {
         return Array.prototype.filter.call(
           document.getElementsByTagName('span'),
-          (el) => el.getAttribute('data-id') == FaqId
+          (el) => el.getAttribute('data-id') === FaqId
         );
       }
 
@@ -365,32 +365,32 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
             try {
 
-              if (event.currentTarget.children[0].classList != undefined) {
+              if (event.currentTarget.children[0].classList !== undefined) {
                 event.currentTarget.children[0].classList.add("hideDiv");
               }
 
 
-              if (event.currentTarget.children[1].classList != undefined) {
+              if (event.currentTarget.children[1].classList !== undefined) {
                 event.currentTarget.children[1].classList.remove("hideDiv");
               }
 
             }
-            catch (e) { }
+            catch (e) { console.log(e)}
           }
           else {
             event.target.nextElementSibling.classList.add("hideDiv");
             try {
-              if (event.currentTarget.children[1].classList != undefined) {
+              if (event.currentTarget.children[1].classList !== undefined) {
                 event.currentTarget.children[1].classList.add("hideDiv");
               }
 
-              if (event.currentTarget.children[0].classList != undefined) {
+              if (event.currentTarget.children[0].classList !== undefined) {
                 event.currentTarget.children[0].classList.remove("hideDiv");
               }
               event.currentTarget.children[3].removeAttribute("style");
 
             }
-            catch (e) { }
+            catch (e) {console.log(e) }
           }
         }
           else {
@@ -416,12 +416,12 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
           }
         }
-        if (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) {
+        if (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) {
           this.setFaqWebPartHeightDynamic();
         }
       }
 
-      public dynamicHeight = () => {
+      public dynamicHeight = ():void => {
         const SPCanvasNode = document.getElementsByClassName("SPCanvas");
         const accordionNode = document.getElementsByClassName("accordion");
         if (SPCanvasNode.length > 0 && accordionNode.length > 0) {
@@ -430,8 +430,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         }
       }
 
-      public setFaqWebPartHeightDynamic = () => {
-        if (this.state.actualCanvasContentHeight == 0) {
+      public setFaqWebPartHeightDynamic = ():void => {
+        if (this.state.actualCanvasContentHeight === 0) {
           this.setNodeValues();
         }
         else {
@@ -439,13 +439,13 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         }
       }
 
-      public accordionOnchange = () => {
-        if (document.getElementsByClassName("mainContent") != undefined && document.getElementsByClassName("mainContent").length > 0) {
+      public accordionOnchange = ():void => {
+        if (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) {
           this.setFaqWebPartHeightDynamic();
         }
       }
 
-      public includes = (container, value) => {
+      public includes = (container, value):boolean => {
         let returnValue = false;
         const pos = container.indexOf(value);
         if (pos >= 0) {
@@ -498,20 +498,19 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
 
             <Accordion allowMultipleExpanded={true} allowZeroExpanded={true} onChange={this.accordionOnchange.bind(this)} preExpanded={this.state.filteredCategoryData}
             >
-              {uniqueBC.map((item) => (
+              {uniqueBC.map((item,index) => (
                 <div>
-                  {this.distinct(FaqData, "CategoryNameEN").map((allCat) => (
+                  {this.distinct(FaqData, "CategoryNameEN").map((allCat,index) => (
                     <div className={`acc-${allCat.CategoryNameEN} accordeonBlock`}>
                       <AccordionItem uuid={allCat.CategoryNameEN}>
                         <AccordionItemHeading>
                           <AccordionItemButton >
-                            {(userLang == "EN" ? allCat.CategoryNameEN : allCat.CategoryNameFR)}
+                            {(userLang ==="EN" ? allCat.CategoryNameEN : allCat.CategoryNameFR)}
                           </AccordionItemButton>
                         </AccordionItemHeading>
                         <AccordionItemPanel>
                           <div className="acc-item-panel">
-                            {FaqData.filter(it => it.CategoryNameEN == allCat.CategoryNameEN).map((allFaq) => (
-
+                            {FaqData.filter(it => it.CategoryNameEN === allCat.CategoryNameEN).map((allFaq,index) => (
                               <div
                                 className="acc-item"
                                 data-id={allFaq.Id}
@@ -522,10 +521,10 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                                 <Icon id="chevrondown" iconName="chevrondown" aria-label={this.strings.iconPlusLabel} data-id={allFaq.Id} className={'plusminusImg'} />
                                 <Icon id="chevronup" iconName="chevronup" aria-label={this.strings.iconMinusLabel} data-id={allFaq.Id} className={"plusminusImg hideDiv"} />
 
-                                <span tabIndex={0} onKeyUp={event => this.loadMoreEventFromKeybord(event)} className="acc-span-text" data-id={allFaq.Id}>{(userLang == "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}</span>
+                                <span tabIndex={0} onKeyUp={event => this.loadMoreEventFromKeybord(event)} className="acc-span-text" data-id={allFaq.Id}>{(userLang === "EN" ? allFaq.QuestionEN : allFaq.QuestionFR)}</span>
                                 <div className="hideDiv">
                                   <div className="acc-answer">
-                                    {parse((userLang == "EN" ? allFaq.AnswerEN : allFaq.AnswerFR))}
+                                    {parse((userLang === "EN" ? allFaq.AnswerEN : allFaq.AnswerFR))}
                                   </div>
                                 </div>
                               </div>
