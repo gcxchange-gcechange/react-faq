@@ -56,7 +56,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       this.strings = SelectLanguage(this.props.prefLang);
       await this.props.updateWebPart();
     }
-  };
+  }
 
   constructor(props) {
     super(props);
@@ -535,14 +535,14 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                                   aria-label={this.strings.iconPlusLabel}
                                   data-id={allFaq.Id}
                                   className={"plusminusImg"}
-                                ></Icon>
+                                />
                                 <Icon
                                   id="chevronup"
                                   iconName="chevronup"
                                   aria-label={this.strings.iconMinusLabel}
                                   data-id={allFaq.Id}
                                   className={"plusminusImg hideDiv"}
-                                ></Icon>
+                                />
 
                                 <span
                                   role="heading"
@@ -554,7 +554,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                                   className="acc-span-text"
                                   data-id={allFaq.Id}
                                 >
-                                  {userLang == "EN"
+                                  {userLang === "EN"
                                     ? allFaq.QuestionEN
                                     : allFaq.QuestionFR}
                                 </span>
