@@ -84,7 +84,6 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       if (Environment.type === EnvironmentType.SharePoint || Environment.type === EnvironmentType.ClassicSharePoint) {
         // Mapping to be used when webpart runs in SharePoint.
         this.faqServicesInstance = serviceScope.consume(FaqServices.serviceKey);
-      } else {
       }
       else {
         console.log("App is not running in Sharepoint Online")
@@ -205,11 +204,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
   public getSuggestionValue = (suggestion) => {
     if (suggestion.length < 0) {
       return "";
-    } else {
-      return this.strings.Lang == "FR"
-        ? suggestion.QuestionFR
-        : suggestion.QuestionEN;
-    }
+    } 
     else {
       return (this.strings.Lang === "FR" ? suggestion.QuestionFR : suggestion.QuestionEN);
     }
