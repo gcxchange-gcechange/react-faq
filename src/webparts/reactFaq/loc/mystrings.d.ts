@@ -1,4 +1,5 @@
 declare interface IReactFaqWebPartStrings {
+  userLang: string;
   PropertyPaneDescription: string;
   BasicGroupName: string;
   DescriptionFieldLabel: string;
