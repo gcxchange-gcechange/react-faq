@@ -8,9 +8,9 @@ import {
   PropertyPaneDropdown
 } from '@microsoft/sp-property-pane';
 
-import * as strings from 'ReactFaqWebPartStrings';
 import ReactFaq from './components/ReactFaq';
 import { IReactFaqProps } from './components/IReactFaqProps';
+import { SelectLanguage } from "./components/SelectLanguage";
 
 export interface IReactFaqWebPartProps {
   listName:string;
@@ -18,14 +18,24 @@ export interface IReactFaqWebPartProps {
 }
 
 export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebPartProps> {
+  private strings: IReactFaqWebPartStrings;
+
+  protected async onInit(): Promise<void> {
+    this.strings = SelectLanguage(this.properties.prefLang);
+  }
+  public updateWebPart= async () => {
+    this.context.propertyPane.refresh();
+    this.render();
+  }
 
   public render(): void {
-    const element: React.ReactElement<IReactFaqProps > = React.createElement(
+    const element: React.ReactElement<IReactFaqProps> = React.createElement(
       ReactFaq,
       {
-        listName:this.properties.listName,
+        listName: this.properties.listName,
         ServiceScope: this.context.serviceScope,
         prefLang: this.properties.prefLang,
+        updateWebPart:this.updateWebPart
       }
     );
 
@@ -37,7 +47,7 @@ export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebP
   }
 
   protected get dataVersion(): Version {
-    return Version.parse('1.0');
+    return Version.parse("1.0");
   }
 
   protected getPropertyPaneConfiguration(): IPropertyPaneConfiguration {
@@ -45,27 +55,29 @@ export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebP
       pages: [
         {
           header: {
-            description: strings.PropertyPaneDescription
+            description: this.strings.PropertyPaneDescription,
           },
           groups: [
             {
-              groupName: strings.BasicGroupName,
+              groupName: this.strings.BasicGroupName,
               groupFields: [
-                PropertyPaneTextField('listName', {
-                  label: strings.ListNameFieldLabel
+                PropertyPaneTextField("listName", {
+                  label: this.strings.ListNameFieldLabel,
                 }),
-                PropertyPaneDropdown('prefLang', {
-                  label: 'Preferred Language',
+                PropertyPaneDropdown("prefLang", {
+                  label: "Preferred Language",
                   options: [
-                    { key: 'account', text: 'Account' },
-                    { key: 'en-us', text: 'English' },
-                    { key: 'fr-fr', text: 'Français' }
-                  ]})
-              ]
-            }
-          ]
-        }
-      ]
+                    { key: "account", text: "Account" },
+                    { key: "en-us", text: "English" },
+                    { key: "fr-fr", text: "Français" },
+                  ],
+                  selectedKey: this.strings.userLang,
+                }),
+              ],
+            },
+          ],
+        },
+      ],
     };
   }
 }

@@ -15,11 +15,9 @@ export class FaqServices implements IFaqServices {
     serviceScope.whenFinished(() => {
       this._spHttpClient = serviceScope.consume(SPHttpClient.serviceKey);
       this._pageContext = serviceScope.consume(PageContext.serviceKey);
-      this._currentWebUrl = this._pageContext.web.absoluteUrl;
+      this._currentWebUrl = this._pageContext.web.absoluteUrl;      
     });
-
   }
-
 
   public getFaq(listName): Promise<IFaqProp[]> {
     return new Promise<IFaqProp[]>((resolve: any) => {
@@ -91,12 +89,10 @@ export class FaqServices implements IFaqServices {
                   Modified: collection[i].Modified
                 });
               }
-
             }
             else {
               throw new Error(response.text().toString());
             }
-
             return FaqProp;
           });
         });
