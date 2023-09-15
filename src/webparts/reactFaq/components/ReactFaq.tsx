@@ -326,7 +326,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       public getFaqElement = (FaqId) => {
         return Array.prototype.filter.call(
           document.getElementsByTagName('span'),
-          (el) => el.getAttribute('data-id') === FaqId
+          (el) => el.getAttribute('data-id') === String(FaqId)
         );
       }
 
@@ -514,7 +514,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
                 <div key={index}>
                   {this.distinct(FaqData, "CategoryNameEN").map((allCat,index) => (
                     <div className={`acc-${allCat.CategoryNameEN} accordeonBlock`} key={index}>
-                      <AccordionItem uuid={allCat.CategoryNameEN}>
+                      <AccordionItem uuid={allCat.Id}>
                         <AccordionItemHeading>
                           <AccordionItemButton >
                             {(userLang ==="EN" ? allCat.CategoryNameEN : allCat.CategoryNameFR)}
