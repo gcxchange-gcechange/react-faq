@@ -137,7 +137,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         const autoSuggestTextbox = document.getElementById("txtSearchBox") as HTMLTextAreaElement;
         autoSuggestTextbox.value = currentTargetText;
         autoSuggestTextbox.blur();
-        let FaqId; let FaqCategory;
+        let FaqId:number; let FaqCategory:string;
         if(FaqFilteredData.length>1){
           FaqFilteredData.map((item,index) => {
             if(item.QuestionEN.trim() === currentTargetText.trim() || item.QuestionFR.trim()===currentTargetText.trim()){
