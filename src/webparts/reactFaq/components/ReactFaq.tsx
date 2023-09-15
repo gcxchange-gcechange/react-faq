@@ -131,15 +131,12 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       currentTargetText = event.currentTarget.innerText;
     }
 
-    console.log("current " + currentTargetText);
     const FaqFilteredData = this.filterByValue(FaqData, currentTargetText);
     if (FaqFilteredData) {
-      console.log("FaqFilteredData" + FaqFilteredData);
       if (FaqFilteredData.length > 0) {
         const autoSuggestTextbox = document.getElementById("txtSearchBox") as HTMLTextAreaElement;
         autoSuggestTextbox.value = currentTargetText;
         autoSuggestTextbox.blur();
-        console.log(autoSuggestTextbox.value);
         let FaqId; let FaqCategory;
         if(FaqFilteredData.length>1){
           FaqFilteredData.map((item,index) => {
@@ -153,14 +150,12 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
           FaqId = FaqFilteredData[0].Id;
           FaqCategory = FaqFilteredData[0].CategoryNameEN;
         }
-        console.log("FAQID",FaqId);
         const catData = [];
         catData.push(FaqCategory);
         this.setState({ filteredCategoryData: catData });
         const nodElem = 'acc-' + FaqCategory;
         const node = document.getElementsByClassName(nodElem);
         const chNode = node[0].children[0].children[0].children[0];
-        console.log("CHNODE", chNode);
         const newAttr = document.createAttribute('aria-expanded');
         newAttr.value = 'true';
         chNode.setAttributeNode(newAttr);
