@@ -134,15 +134,26 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     console.log("current " + currentTargetText);
     const FaqFilteredData = this.filterByValue(FaqData, currentTargetText);
     if (FaqFilteredData) {
-      console.log("faqdata exist" + FaqFilteredData.length);
+      console.log("FaqFilteredData" + FaqFilteredData);
       if (FaqFilteredData.length > 0) {
         const autoSuggestTextbox = document.getElementById("txtSearchBox") as HTMLTextAreaElement;
         autoSuggestTextbox.value = currentTargetText;
         autoSuggestTextbox.blur();
         console.log(autoSuggestTextbox.value);
-        const FaqId = FaqFilteredData[0].Id;
+        let FaqId; let FaqCategory;
+        if(FaqFilteredData.length>1){
+          FaqFilteredData.map((item,index) => {
+            if(item.QuestionEN.trim() === currentTargetText.trim() || item.QuestionFR.trim()===currentTargetText.trim()){
+              FaqId=FaqFilteredData[index].Id;
+              FaqCategory = FaqFilteredData[index].CategoryNameEN;
+            }
+          })
+        }
+        else if(FaqFilteredData.length===1){
+          FaqId = FaqFilteredData[0].Id;
+          FaqCategory = FaqFilteredData[0].CategoryNameEN;
+        }
         console.log("FAQID",FaqId);
-        const FaqCategory = FaqFilteredData[0].CategoryNameEN;
         const catData = [];
         catData.push(FaqCategory);
         this.setState({ filteredCategoryData: catData });
