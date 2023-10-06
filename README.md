@@ -35,11 +35,8 @@ Column Name|Field Type
 None
 ## Version 
 
-Used SharePoint Framework Webpart or Sharepoint Framework Extension 
-
-![SPFx 1.8.2](https://img.shields.io/badge/SPFx-1.8.2-green.svg)
-
-![Node.js v10](https://img.shields.io/badge/Node.js-10.24.1-green.svg)
+![SPFX](https://img.shields.io/badge/SPFX-1.17.4-green.svg)
+![Node.js](https://img.shields.io/badge/Node.js-v16.3+-green.svg)
 
 ## Applies to
 
@@ -54,11 +51,12 @@ Version|Date|Comments
 -------|----|--------
 1.0.0 | April 25, 2020 | Initial release
 1.0.1 | October 30, 2020 | Fix limit 100 items
+1.0.1 | September 15, 2023 | Upgraded to SPFX 1.17.4
 
 ## Minimal Path to Awesome
 - Clone this repository
 - Ensure that you are at the solution folder
-- Ensure the current version of the Node.js (10.24.1)
+- Ensure the current version of the Node.js (16.3+)
 - In the command-line run:
   - **npm install**
   - **gulp clean**

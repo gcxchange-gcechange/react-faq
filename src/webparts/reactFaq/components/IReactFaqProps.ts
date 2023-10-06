@@ -3,5 +3,5 @@ export interface IReactFaqProps {
   listName: string;
   ServiceScope: ServiceScope;
   prefLang: string;
-  updateWebPart: Function;
+  updateWebPart: any;
 }

@@ -21,13 +21,13 @@ export class FaqServices implements IFaqServices {
 
   public getFaq(listName): Promise<IFaqProp[]> {
     return new Promise<IFaqProp[]>((resolve: any) => {
-      var ParentDetails = this.getFaqs(listName);
+      const ParentDetails = this.getFaqs(listName);
       resolve(ParentDetails);
     });
   }
 
   public async getMockFaq(): Promise<any> {
-    var tempOrg = [{
+    const tempOrg = [{
       Id: 1,
       Title: "What is the HR Policy?",
       Answer: "There is no change in HR Policy",
@@ -74,8 +74,8 @@ export class FaqServices implements IFaqServices {
         .then((response: SPHttpClientResponse) => {
           return response.json().then((responseFormatted: any) => {
             if (response.ok) {
-              var collection = responseFormatted.value;
-              for (var i = 0; i < collection.length; i++) {
+              const collection = responseFormatted.value;
+              for (let i = 0; i < collection.length; i++) {
                 FaqProp.push({
                   Id: collection[i].Id,
                   QuestionEN: collection[i].QuestionEN,

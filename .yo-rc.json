@@ -1,11 +1,20 @@
 {
   "@microsoft/generator-sharepoint": {
+    "plusBeta": false,
     "isCreatingSolution": true,
-    "environment": "spo",
-    "version": "1.8.2",
-    "libraryName": "spfxwebparts",
+    "nodeVersion": "16.15.1",
+    "sdksVersions": {
+      "@microsoft/microsoft-graph-client": "3.0.2",
+      "@microsoft/teams-js": "2.9.1"
+    },
+    "version": "1.17.4",
+    "libraryName": "react-faq",
     "libraryId": "f3b9b2b7-533c-42db-9a81-d3ea68e1e8b6",
+    "environment": "spo",
     "packageManager": "npm",
+    "solutionName": "react-faq",
+    "solutionShortDescription": "react-faq description",
+    "skipFeatureDeployment": true,
     "isDomainIsolated": false,
     "componentType": "webpart"
   }
