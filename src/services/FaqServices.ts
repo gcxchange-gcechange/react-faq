@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { ServiceScope, ServiceKey } from '@microsoft/sp-core-library';
 import { PageContext } from '@microsoft/sp-page-context';
 import { SPHttpClient, SPHttpClientResponse } from '@microsoft/sp-http';

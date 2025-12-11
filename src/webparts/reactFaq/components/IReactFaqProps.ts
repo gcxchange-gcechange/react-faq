@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { ServiceScope } from '@microsoft/sp-core-library';
 export interface IReactFaqProps {
   listName: string;
