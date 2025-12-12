@@ -9,7 +9,7 @@ import Autosuggest from 'react-autosuggest';
 import { FaqServices } from '../../../services/FaqServices';
 //import ReactHtmlParser from 'react-html-parser';
 import parse from 'html-react-parser';
-import { Icon } from 'office-ui-fabric-react';
+import { Icon} from 'office-ui-fabric-react';
 
 //import * as strings from "ReactFaqWebPartStrings";
 import { SelectLanguage } from './SelectLanguage';
@@ -169,10 +169,13 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         const newAttrII = document.createAttribute('aria-expanded');
         newAttrII.value = 'true';
         FaqEle.setAttributeNode(newAttrII);
-        FaqEle.nextSibling[0].style.display = 'block';
-        FaqEle.nextSibling[0]?.removeAttribute('class');
-        if (FaqEle.previousElementSibling.previousSibling[0].classList !== undefined) {
-          FaqEle.previousElementSibling.previousSibling[0].classList.add("hideDiv");
+
+        ///USE HTMLELEMENT //
+        (FaqEle.nextElementSibling as HTMLElement).style.display = 'block';
+        (FaqEle.nextElementSibling as HTMLElement).removeAttribute('class');
+
+        if ((FaqEle.previousElementSibling.previousSibling[0] as HTMLElement).classList !== undefined) {
+          (FaqEle.previousElementSibling.previousSibling[0] as HTMLElement).classList.add("hideDiv");
         }
 
         if (FaqEle.previousElementSibling.classList !== undefined) {
@@ -297,7 +300,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
           return c.CategorySortOrder - d.CategorySortOrder;
         });
 
-        //Sorting the FQA as per CategorySortOrder
+        //Sorting the FAQ as per CategorySortOrder
         distCate.forEach((distCateItem) => {
           Data.map((item) => {
             if (distCateItem.CategoryNameEN.toLowerCase() === item.CategoryNameEN.toLowerCase()) {
@@ -306,7 +309,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
           });
         });
 
-    //Sorting the FQA as per QuestionSortOrder
+    //Sorting the FAQ as per QuestionSortOrder
     result.sort((a, b) => {
       return a.QuestionSortOrder - b.QuestionSortOrder;
     });
@@ -478,7 +481,6 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
   public render(): React.ReactElement<IReactFaqProps> {
     let uniqueBC = [];
     let FaqData = [];
-
 
     if (this.state.originalData?.length > 0) {
       FaqData = this.categoryAndQuestionSorting(this.state.originalData);
