@@ -170,12 +170,11 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         newAttrII.value = 'true';
         FaqEle.setAttributeNode(newAttrII);
 
-        ///USE HTMLELEMENT //
-        (FaqEle.nextElementSibling as HTMLElement).style.display = 'block';
-        (FaqEle.nextElementSibling as HTMLElement).removeAttribute('class');
+        (FaqEle.nextSibling as HTMLElement).style.display = 'block';
+        (FaqEle.nextSibling as HTMLElement).removeAttribute('class');
 
-        if ((FaqEle.previousElementSibling.previousSibling[0] as HTMLElement).classList !== undefined) {
-          (FaqEle.previousElementSibling.previousSibling[0] as HTMLElement).classList.add("hideDiv");
+        if ((FaqEle.previousElementSibling.previousSibling as HTMLElement).classList !== undefined) {
+          (FaqEle.previousElementSibling.previousSibling as HTMLElement).classList.add("hideDiv");
         }
 
         if (FaqEle.previousElementSibling.classList !== undefined) {
