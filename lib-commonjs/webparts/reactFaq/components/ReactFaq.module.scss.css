@@ -7,77 +7,8 @@
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 25px 50px 0 rgba(0, 0, 0, 0.1);
 }
 .reactFaq .row {
-  margin: 0 -8px;
-  box-sizing: border-box;
-  zoom: 1;
-  color: #ffffff;
   background-color: #005a9e;
   padding: 20px;
-}
-.reactFaq .row::before, .reactFaq .row::after {
-  display: table;
-  content: "";
-  line-height: 0;
-}
-.reactFaq .row::after {
-  clear: both;
-}
-.reactFaq .column {
-  position: relative;
-  min-height: 1px;
-  padding-left: 8px;
-  padding-right: 8px;
-  box-sizing: border-box;
-}
-[dir=ltr] .reactFaq .column {
-  float: left;
-}
-[dir=rtl] .reactFaq .column {
-  float: right;
-}
-.reactFaq .column .ms-Grid {
-  padding: 0;
-}
-@media (min-width: 640px) {
-  .reactFaq .column {
-    width: 83.3333333333%;
-  }
-}
-@media (min-width: 1024px) {
-  .reactFaq .column {
-    width: 66.6666666667%;
-  }
-}
-@media (min-width: 1024px) {
-  [dir=ltr] .reactFaq .column {
-    left: 16.6666666667%;
-  }
-  [dir=rtl] .reactFaq .column {
-    right: 16.6666666667%;
-  }
-}
-@media (min-width: 640px) {
-  [dir=ltr] .reactFaq .column {
-    left: 8.3333333333%;
-  }
-  [dir=rtl] .reactFaq .column {
-    right: 8.3333333333%;
-  }
-}
-.reactFaq .title {
-  font-size: 21px;
-  font-weight: 100;
-  color: #ffffff;
-}
-.reactFaq .subTitle {
-  font-size: 17px;
-  font-weight: 300;
-  color: #ffffff;
-}
-.reactFaq .description {
-  font-size: 17px;
-  font-weight: 300;
-  color: #ffffff;
 }
 .reactFaq .button {
   text-decoration: none;

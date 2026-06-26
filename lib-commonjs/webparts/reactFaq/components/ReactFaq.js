@@ -18,7 +18,7 @@ var ErrorBoundary_1 = tslib_1.__importDefault(require("./ErrorBoundary"));
 require("./reactAccordion.css");
 var ReactFaq = /** @class */ (function (_super) {
     tslib_1.__extends(ReactFaq, _super);
-    function ReactFaq(props) {
+    function ReactFaq(props, state) {
         var _this = _super.call(this, props) || this;
         _this.strings = (0, SelectLanguage_1.SelectLanguage)(_this.props.prefLang);
         _this.onHandleChange = function (event, value, FaqData) {
@@ -32,8 +32,8 @@ var ReactFaq = /** @class */ (function (_super) {
                 }
             }
         };
-        _this.onChange = function (event, _a, method) {
-            var newValue = _a.newValue;
+        _this.onChange = function (event, _a) {
+            var newValue = _a.newValue, method = _a.method;
             if (method === "enter") {
                 console.log("enter");
             }
@@ -52,6 +52,7 @@ var ReactFaq = /** @class */ (function (_super) {
             }
         };
         _this.onSuggestionSelected = function (FaqData, event, method) {
+            var _a, _b, _c, _d;
             var currentTargetText = "";
             if (method.method === "enter") {
                 console.log("enter" + JSON.stringify(method));
@@ -71,7 +72,8 @@ var ReactFaq = /** @class */ (function (_super) {
                     var FaqCategory_1;
                     if (FaqFilteredData.length > 1) {
                         FaqFilteredData.map(function (item, index) {
-                            if (item.QuestionEN.trim() === currentTargetText.trim() || item.QuestionFR.trim() === currentTargetText.trim()) {
+                            var _a, _b;
+                            if (((_a = item.QuestionEN) === null || _a === void 0 ? void 0 : _a.trim()) === currentTargetText.trim() || ((_b = item.QuestionFR) === null || _b === void 0 ? void 0 : _b.trim()) === currentTargetText.trim()) {
                                 FaqId_1 = FaqFilteredData[index].Id;
                                 FaqCategory_1 = FaqFilteredData[index].CategoryNameEN;
                             }
@@ -99,14 +101,14 @@ var ReactFaq = /** @class */ (function (_super) {
                     FaqEle.setAttributeNode(newAttrII);
                     FaqEle.nextSibling.style.display = 'block';
                     FaqEle.nextSibling.removeAttribute('class');
-                    if (FaqEle.previousElementSibling.previousSibling.classList !== undefined) {
-                        FaqEle.previousElementSibling.previousSibling.classList.add("hideDiv");
+                    if (((_a = FaqEle.previousElementSibling) === null || _a === void 0 ? void 0 : _a.previousSibling).classList !== undefined) {
+                        ((_b = FaqEle.previousElementSibling) === null || _b === void 0 ? void 0 : _b.previousSibling).classList.add("hideDiv");
                     }
-                    if (FaqEle.previousElementSibling.classList !== undefined) {
-                        FaqEle.previousElementSibling.classList.remove("hideDiv");
+                    if (((_c = FaqEle.previousElementSibling) === null || _c === void 0 ? void 0 : _c.classList) !== undefined) {
+                        (_d = FaqEle.previousElementSibling) === null || _d === void 0 ? void 0 : _d.classList.remove("hideDiv");
                     }
-                    var txtSibEle = txtNode.nextElementSibling;
-                    txtSibEle.classList.remove("react-autosuggest__suggestions-container--open");
+                    var txtSibEle = txtNode === null || txtNode === void 0 ? void 0 : txtNode.nextElementSibling;
+                    txtSibEle === null || txtSibEle === void 0 ? void 0 : txtSibEle.classList.remove("react-autosuggest__suggestions-container--open");
                     FaqEle.scrollIntoView({ behavior: 'smooth' });
                     if (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) {
                         _this.setFaqWebPartHeightDynamic();
@@ -157,8 +159,13 @@ var ReactFaq = /** @class */ (function (_super) {
             return (React.createElement("div", null, (_this.strings.Lang === "FR" ? suggestion.QuestionFR : suggestion.QuestionEN)));
         };
         _this.setNodeValues = function () {
-            var SPCanvasFirstParent = (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.offsetHeight : 0;
-            var SPCanvasSecondParent = (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.parentElement.offsetHeight : 0;
+            var _a, _b, _c, _d, _e;
+            var mainContentElements = document.getElementsByClassName("mainContent");
+            var spCanvasElement = mainContentElements.length > 0
+                ? document.getElementsByClassName("SPCanvas")[0]
+                : undefined;
+            var SPCanvasFirstParent = (_b = (_a = spCanvasElement === null || spCanvasElement === void 0 ? void 0 : spCanvasElement.parentElement) === null || _a === void 0 ? void 0 : _a.offsetHeight) !== null && _b !== void 0 ? _b : 0;
+            var SPCanvasSecondParent = (_e = (_d = (_c = spCanvasElement === null || spCanvasElement === void 0 ? void 0 : spCanvasElement.parentElement) === null || _c === void 0 ? void 0 : _c.parentElement) === null || _d === void 0 ? void 0 : _d.offsetHeight) !== null && _e !== void 0 ? _e : 0;
             _this.setState({
                 actualCanvasContentHeight: SPCanvasFirstParent,
                 actualCanvasWrapperHeight: SPCanvasSecondParent,
@@ -218,8 +225,13 @@ var ReactFaq = /** @class */ (function (_super) {
             var SPCanvasNode = document.getElementsByClassName("SPCanvas");
             var accordionNode = document.getElementsByClassName("accordion");
             if (SPCanvasNode.length > 0 && accordionNode.length > 0) {
-                SPCanvasNode[0].parentElement.style.height = (_this.state.actualCanvasContentHeight + (accordionNode[0].parentElement.offsetHeight - _this.state.actualAccordionHeight)) + "px";
-                SPCanvasNode[0].parentElement.parentElement.style.height = (_this.state.actualCanvasWrapperHeight + (accordionNode[0].parentElement.offsetHeight - _this.state.actualAccordionHeight)) + "px";
+                var canvasParent = SPCanvasNode[0].parentElement;
+                var canvasGrandParent = canvasParent === null || canvasParent === void 0 ? void 0 : canvasParent.parentElement;
+                var accordionParent = accordionNode[0].parentElement;
+                if (canvasParent && canvasGrandParent && accordionParent) {
+                    canvasParent.style.height = (_this.state.actualCanvasContentHeight + (accordionParent.offsetHeight - _this.state.actualAccordionHeight)) + "px";
+                    canvasGrandParent.style.height = (_this.state.actualCanvasWrapperHeight + (accordionParent.offsetHeight - _this.state.actualAccordionHeight)) + "px";
+                }
             }
         };
         _this.setFaqWebPartHeightDynamic = function () {
@@ -294,25 +306,28 @@ var ReactFaq = /** @class */ (function (_super) {
     };
     ReactFaq.prototype.componentDidMount = function () {
         return tslib_1.__awaiter(this, void 0, void 0, function () {
-            var ua, trident, rv;
-            return tslib_1.__generator(this, function (_a) {
-                switch (_a.label) {
+            var accordionElement, ua, trident, rv, searchBoxElement;
+            var _a, _b;
+            return tslib_1.__generator(this, function (_c) {
+                switch (_c.label) {
                     case 0:
                         if (!(sp_core_library_1.Environment.type === sp_core_library_1.EnvironmentType.SharePoint || sp_core_library_1.Environment.type === sp_core_library_1.EnvironmentType.ClassicSharePoint)) return [3 /*break*/, 2];
                         return [4 /*yield*/, this.loadFaq()];
                     case 1:
-                        _a.sent();
+                        _c.sent();
                         return [3 /*break*/, 2];
                     case 2:
+                        accordionElement = document.getElementsByClassName("accordion")[0];
                         this.setState({
-                            actualAccordionHeight: (document.getElementsByClassName("accordion") !== undefined && document.getElementsByClassName("accordion").length > 0) ? document.getElementsByClassName("accordion")[0].parentElement.offsetHeight : 0
+                            actualAccordionHeight: (_b = (_a = accordionElement === null || accordionElement === void 0 ? void 0 : accordionElement.parentElement) === null || _a === void 0 ? void 0 : _a.offsetHeight) !== null && _b !== void 0 ? _b : 0
                         });
                         ua = window.navigator.userAgent;
                         trident = ua.indexOf('Trident/');
                         if (trident > 0) {
                             rv = ua.indexOf('rv:');
-                            if ((parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10)) < 12) {
-                                document.getElementById("txtSearchBox").style.paddingTop = '3px';
+                            searchBoxElement = document.getElementById("txtSearchBox");
+                            if (searchBoxElement && (parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10)) < 12) {
+                                searchBoxElement.style.paddingTop = '3px';
                             }
                         }
                         return [2 /*return*/];
@@ -440,7 +455,7 @@ var ReactFaq = /** @class */ (function (_super) {
         var userLang = this.strings.Lang;
         return (React.createElement("div", { className: "container" },
             React.createElement("div", { className: "FaqSearchBox", "accept-charset": "UTF-8" },
-                React.createElement(react_autosuggest_1.default, { suggestions: suggestions, onSuggestionsFetchRequested: this.onSuggestionsFetchRequested, onSuggestionsClearRequested: this.onSuggestionsClearRequested, getSuggestionValue: this.getSuggestionValue, renderSuggestion: this.renderSuggestion, onSuggestionSelected: this.onSuggestionSelected.bind(this, this.state.actualData), inputProps: inputProps, focusInputOnSuggestionClick: false, focusFirstSuggestion: true })),
+                React.createElement(react_autosuggest_1.default, { suggestions: suggestions, onSuggestionsFetchRequested: this.onSuggestionsFetchRequested, onSuggestionsClearRequested: this.onSuggestionsClearRequested, getSuggestionValue: this.getSuggestionValue, renderSuggestion: this.renderSuggestion, onSuggestionSelected: this.onSuggestionSelected.bind(this, this.state.actualData), inputProps: inputProps, focusInputOnSuggestionClick: false })),
             React.createElement(ErrorBoundary_1.default, null,
                 React.createElement("div", { className: "clearBody" },
                     React.createElement(react_accessible_accordion_1.Accordion, { allowMultipleExpanded: true, allowZeroExpanded: true, onChange: this.accordionOnchange.bind(this), preExpanded: this.state.filteredCategoryData }, uniqueBC.map(function (item, index) { return (React.createElement("div", { key: index }, _this.distinct(FaqData, "CategoryNameEN").map(function (allCat, index) { return (React.createElement("div", { className: "acc-".concat(allCat.CategoryNameEN, " accordeonBlock"), key: index },

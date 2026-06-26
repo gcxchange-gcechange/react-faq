@@ -18,7 +18,7 @@ export interface IReactFaqWebPartProps {
 }
 
 export default class ReactFaqWebPart extends BaseClientSideWebPart<IReactFaqWebPartProps> {
-  private strings: IReactFaqWebPartStrings;
+  private strings!: IReactFaqWebPartStrings;
 
   protected async onInit(): Promise<void> {
     this.strings = SelectLanguage(this.properties.prefLang);

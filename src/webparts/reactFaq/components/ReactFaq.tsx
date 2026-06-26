@@ -50,7 +50,7 @@ export interface IFaqState {
 
 
 export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState> {
-  private faqServicesInstance: IFaqServices;
+  private faqServicesInstance!: IFaqServices;
 
   public strings = SelectLanguage(this.props.prefLang);
 
@@ -61,7 +61,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
   }
 
-  constructor(props) {
+  constructor(props: IReactFaqProps, state: IFaqState) {
     super(props);
 
     this.state = {
@@ -96,7 +96,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
   }
 
-  public onHandleChange = (event, value, FaqData) => {
+  public onHandleChange = (event: React.SyntheticEvent<HTMLElement>, value: string, FaqData: IFaqProp[]) => {
     if (FaqData.length > 0 && event !== undefined) {
       if (value === "") {
         const FaqFilteredData = this.filterByValue(FaqData, value);
@@ -106,7 +106,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       }
     }
   };
-  public onChange = (event, { newValue }, method):void => {
+  public onChange = (event: React.SyntheticEvent<HTMLElement>, { newValue, method }: { newValue: string; method: string }): void => {
     if (method === "enter") {
       console.log("enter");
     } else {
@@ -124,10 +124,10 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
   };
 
-  public onSuggestionSelected = (FaqData, event, method):void => {
+  public onSuggestionSelected = (FaqData: IFaqProp[], event: React.SyntheticEvent<HTMLElement>, method: { method: string; suggestionValue: string }): void => {
     let currentTargetText = "";
-    if(method.method ==="enter"){
-      console.log("enter"+JSON.stringify(method));
+    if (method.method === "enter") {
+      console.log("enter" + JSON.stringify(method));
       currentTargetText = method.suggestionValue;
     } else {
       console.log("click");
@@ -140,10 +140,13 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         const autoSuggestTextbox = document.getElementById("txtSearchBox") as HTMLTextAreaElement;
         autoSuggestTextbox.value = currentTargetText;
         autoSuggestTextbox.blur();
-        let FaqId:number; let FaqCategory:string;
-        if(FaqFilteredData.length>1){
+
+        let FaqId: any; 
+        let FaqCategory: any;
+
+        if (FaqFilteredData.length>1) {
           FaqFilteredData.map((item,index) => {
-            if(item.QuestionEN.trim() === currentTargetText.trim() || item.QuestionFR.trim()===currentTargetText.trim()){
+            if(item.QuestionEN?.trim() === currentTargetText.trim() || item.QuestionFR?.trim()===currentTargetText.trim()){
               FaqId=FaqFilteredData[index].Id;
               FaqCategory = FaqFilteredData[index].CategoryNameEN;
             }
@@ -173,16 +176,16 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         (FaqEle.nextSibling as HTMLElement).style.display = 'block';
         (FaqEle.nextSibling as HTMLElement).removeAttribute('class');
 
-        if ((FaqEle.previousElementSibling.previousSibling as HTMLElement).classList !== undefined) {
-          (FaqEle.previousElementSibling.previousSibling as HTMLElement).classList.add("hideDiv");
+        if ((FaqEle.previousElementSibling?.previousSibling as HTMLElement).classList !== undefined) {
+          (FaqEle.previousElementSibling?.previousSibling as HTMLElement).classList.add("hideDiv");
         }
 
-        if (FaqEle.previousElementSibling.classList !== undefined) {
-          FaqEle.previousElementSibling.classList.remove("hideDiv");
+        if (FaqEle.previousElementSibling?.classList !== undefined) {
+          FaqEle.previousElementSibling?.classList.remove("hideDiv");
         }
 
-        const txtSibEle = txtNode.nextElementSibling;
-        txtSibEle.classList.remove("react-autosuggest__suggestions-container--open");
+        const txtSibEle = txtNode?.nextElementSibling;
+        txtSibEle?.classList.remove("react-autosuggest__suggestions-container--open");
         FaqEle.scrollIntoView({ behavior: 'smooth' });
 
         if (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) {
@@ -192,7 +195,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
   };
 
-  public onSuggestionsFetchRequested = ({ value }):void => {
+  public onSuggestionsFetchRequested = ({ value }: { value: string }):void => {
     this.setState({
       suggestions: this.getSuggestions(value),
     });
@@ -212,7 +215,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
   // When suggestion is clicked, Autosuggest needs to populate the input
   // based on the clicked suggestion. Teach Autosuggest how to calculate the
   // input value for every given suggestion.
-  public getSuggestionValue = (suggestion):any  => {
+  public getSuggestionValue = (suggestion: any): string => {
     if (suggestion.length < 0) {
       return "";
     } 
@@ -221,13 +224,13 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
   }
 
-  public getSuggestions = (value): any  => {
+  public getSuggestions = (value: any): any  => {
     const inputValue = value.trim().toLowerCase();
     const inputLength = inputValue.length;
     return inputLength === 0
       ? []
       : this.state.actualData.filter(
-          (lang) =>
+          (lang: any) =>
             lang.QuestionFR.toLowerCase().indexOf(inputValue) !== -1 ||
             lang.AnswerFR.toLowerCase().indexOf(inputValue) !== -1 ||
             lang.QuestionEN.toLowerCase().indexOf(inputValue) !== -1 ||
@@ -235,7 +238,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         );
   };
 
-    public renderSuggestion = (suggestion): JSX.Element => {
+    public renderSuggestion = (suggestion: any): JSX.Element => {
       return (
         <div>
           {(this.strings.Lang ==="FR" ? suggestion.QuestionFR : suggestion.QuestionEN)}
@@ -244,8 +247,12 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
     }
 
     public setNodeValues = ()  => {
-      const SPCanvasFirstParent = (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.offsetHeight : 0;
-      const SPCanvasSecondParent = (document.getElementsByClassName("mainContent") !== undefined && document.getElementsByClassName("mainContent").length > 0) ? document.getElementsByClassName("SPCanvas")[0].parentElement.parentElement.offsetHeight : 0;
+      const mainContentElements = document.getElementsByClassName("mainContent");
+      const spCanvasElement = mainContentElements.length > 0
+        ? document.getElementsByClassName("SPCanvas")[0] as HTMLElement | undefined
+        : undefined;
+      const SPCanvasFirstParent = spCanvasElement?.parentElement?.offsetHeight ?? 0;
+      const SPCanvasSecondParent = spCanvasElement?.parentElement?.parentElement?.offsetHeight ?? 0;
       this.setState({
         actualCanvasContentHeight: SPCanvasFirstParent,
         actualCanvasWrapperHeight: SPCanvasSecondParent,
@@ -261,8 +268,9 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       else {
         //await this.loadMockFaq();
       }
+      const accordionElement = document.getElementsByClassName("accordion")[0] as HTMLElement | undefined;
       this.setState({
-        actualAccordionHeight: (document.getElementsByClassName("accordion") !== undefined && document.getElementsByClassName("accordion").length > 0) ? document.getElementsByClassName("accordion")[0].parentElement.offsetHeight : 0
+        actualAccordionHeight: accordionElement?.parentElement?.offsetHeight ?? 0
       });
       const ua = window.navigator.userAgent;
       const trident = ua.indexOf('Trident/');
@@ -270,8 +278,9 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       if (trident > 0) {
         // IE 11 => return version number
         const rv = ua.indexOf('rv:');
-        if ((parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10)) < 12) {
-          document.getElementById("txtSearchBox").style.paddingTop = '3px';
+        const searchBoxElement = document.getElementById("txtSearchBox") as HTMLInputElement | null;
+        if (searchBoxElement && (parseInt(ua.substring(rv + 3, ua.indexOf('.', rv)), 10)) < 12) {
+          searchBoxElement.style.paddingTop = '3px';
         }
       }
     }
@@ -291,8 +300,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       });
   }
 
-      public categoryAndQuestionSorting = (Data) => {
-        const result = [];
+      public categoryAndQuestionSorting = (Data: any) => {
+        const result: string[] = [];
         // Get Distinct category for sorting Category
         const distCate = this.distinct(Data, "CategoryNameEN");
         distCate.sort((c, d) => {
@@ -300,8 +309,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         });
 
         //Sorting the FAQ as per CategorySortOrder
-        distCate.forEach((distCateItem) => {
-          Data.map((item) => {
+        distCate.forEach((distCateItem:any) => {
+          Data.map((item:any) => {
             if (distCateItem.CategoryNameEN.toLowerCase() === item.CategoryNameEN.toLowerCase()) {
               result.push(item);
             }
@@ -309,13 +318,13 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         });
 
     //Sorting the FAQ as per QuestionSortOrder
-    result.sort((a, b) => {
+    result.sort((a: any, b: any) => {
       return a.QuestionSortOrder - b.QuestionSortOrder;
     });
     return result;
   };
 
-      public distinct(items, prop) {
+      public distinct(items: any, prop:any) {
         const unique = [];
         const distinctItems = [];
         for (const item of items) {
@@ -329,7 +338,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
   }
 
       public filterByValue = (arrayData: IFaqProp[], value: string): IFaqProp[] => {
-        return arrayData.filter(o =>
+        return arrayData.filter((o:any) =>
           this.includes(o.QuestionEN.toLowerCase(), value.toLowerCase()) ||
           this.includes(o.AnswerEN.toLowerCase(), value.toLowerCase()) ||
           this.includes(o.QuestionFR.toLowerCase(), value.toLowerCase()) ||
@@ -338,14 +347,14 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       };
 
 
-      public getFaqElement = (FaqId):HTMLElement[] => {
+      public getFaqElement = (FaqId: number):HTMLElement[] => {
         return Array.prototype.filter.call(
           document.getElementsByTagName('span'),
           (el) => el.getAttribute('data-id') === String(FaqId)
         );
       }
 
-      public formatDate = (ModifiedDate): string => {
+      public formatDate = (ModifiedDate: Date): string => {
         const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
         const dt = new Date(ModifiedDate);
         let hours = dt.getHours();
@@ -448,8 +457,13 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         const SPCanvasNode = document.getElementsByClassName("SPCanvas");
         const accordionNode = document.getElementsByClassName("accordion");
         if (SPCanvasNode.length > 0 && accordionNode.length > 0) {
-          SPCanvasNode[0].parentElement.style.height = (this.state.actualCanvasContentHeight + (accordionNode[0].parentElement.offsetHeight - this.state.actualAccordionHeight)) + "px";
-          SPCanvasNode[0].parentElement.parentElement.style.height = (this.state.actualCanvasWrapperHeight + (accordionNode[0].parentElement.offsetHeight - this.state.actualAccordionHeight)) + "px";
+            const canvasParent = SPCanvasNode[0].parentElement as HTMLElement | null;
+            const canvasGrandParent = canvasParent?.parentElement as HTMLElement | null;
+            const accordionParent = accordionNode[0].parentElement as HTMLElement | null;
+            if (canvasParent && canvasGrandParent && accordionParent) {
+              canvasParent.style.height = (this.state.actualCanvasContentHeight + (accordionParent.offsetHeight - this.state.actualAccordionHeight)) + "px";
+              canvasGrandParent.style.height = (this.state.actualCanvasWrapperHeight + (accordionParent.offsetHeight - this.state.actualAccordionHeight)) + "px";
+            }
         }
       }
 
@@ -468,7 +482,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
         }
       }
 
-      public includes = (container, value):boolean => {
+      public includes = (container:any, value:any):boolean => {
         let returnValue = false;
         const pos = container.indexOf(value);
         if (pos >= 0) {
@@ -478,8 +492,8 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
       }
 
   public render(): React.ReactElement<IReactFaqProps> {
-    let uniqueBC = [];
-    let FaqData = [];
+    let uniqueBC: any[] = [];
+    let FaqData: any[] = [];
 
     if (this.state.originalData?.length > 0) {
       FaqData = this.categoryAndQuestionSorting(this.state.originalData);
@@ -514,7 +528,7 @@ export default class ReactFaq extends React.Component<IReactFaqProps, IFaqState>
             )}
             inputProps={inputProps}
             focusInputOnSuggestionClick={false}
-            focusFirstSuggestion={true}
+            //focusFirstSuggestion={true}
           />
         </div>
         <ErrorBoundary>

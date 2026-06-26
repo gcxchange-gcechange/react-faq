@@ -9,9 +9,9 @@ export class FaqServices implements IFaqServices {
 
 
   public static readonly serviceKey: ServiceKey<IFaqServices> = ServiceKey.create<IFaqServices>('vrd:IFaqServices', FaqServices);
-  private _spHttpClient: SPHttpClient;
-  private _pageContext: PageContext;
-  private _currentWebUrl: string;
+  private _spHttpClient!: SPHttpClient;
+  private _pageContext!: PageContext;
+  private _currentWebUrl!: string;
 
   constructor(serviceScope: ServiceScope) {
     serviceScope.whenFinished(() => {
@@ -21,7 +21,7 @@ export class FaqServices implements IFaqServices {
     });
   }
 
-  public getFaq(listName): Promise<IFaqProp[]> {
+  public getFaq(listName: string): Promise<IFaqProp[]> {
     return new Promise<IFaqProp[]>((resolve: any) => {
       const ParentDetails = this.getFaqs(listName);
       resolve(ParentDetails);
@@ -102,6 +102,7 @@ export class FaqServices implements IFaqServices {
     }
     catch (error) {
       console.log("Service API Error - " + error);
+      return [];
     }
   }
 }

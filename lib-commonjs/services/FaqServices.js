@@ -104,7 +104,7 @@ var FaqServices = /** @class */ (function () {
                     case 2:
                         error_1 = _a.sent();
                         console.log("Service API Error - " + error_1);
-                        return [3 /*break*/, 3];
+                        return [2 /*return*/, []];
                     case 3: return [2 /*return*/];
                 }
             });
