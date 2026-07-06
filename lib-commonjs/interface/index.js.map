@@ -1,1 +1,0 @@
-{"version":3,"file":"index.js","sourceRoot":"","sources":["../../src/interface/index.ts"],"names":[],"mappings":"","sourcesContent":["export{IFaqProp} from './IFaqProp';\r\nexport{IFaqServices} from './IFaqServices';\r\n\r\n"]}
