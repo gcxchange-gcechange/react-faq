@@ -7,7 +7,7 @@
       "@microsoft/microsoft-graph-client": "3.0.2",
       "@microsoft/teams-js": "2.9.1"
     },
-    "version": "1.21.1",
+    "version": "1.22.2",
     "libraryName": "react-faq",
     "libraryId": "f3b9b2b7-533c-42db-9a81-d3ea68e1e8b6",
     "environment": "spo",

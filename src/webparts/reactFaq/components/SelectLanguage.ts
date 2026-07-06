@@ -1,6 +1,9 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+
 import * as strings from 'ReactFaqWebPartStrings';
-import * as english from '../loc/en-us.js';
-import * as french from '../loc/fr-fr.js';
+
+const english = require("../loc/en-us.js");
+const french = require("../loc/fr-fr.js");
 
 export function SelectLanguage(lang:string):IReactFaqWebPartStrings {
   switch(lang) {

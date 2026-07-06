@@ -35,7 +35,7 @@ Column Name|Field Type
 None
 ## Version 
 
-![SPFX](https://img.shields.io/badge/SPFX-1.17.4-green.svg)
+![SPFX](https://img.shields.io/badge/SPFX-1.22.2-green.svg)
 ![Node.js](https://img.shields.io/badge/Node.js-v16.3+-green.svg)
 
 ## Applies to
@@ -52,23 +52,25 @@ Version|Date|Comments
 1.0.0 | April 25, 2020 | Initial release
 1.0.1 | October 30, 2020 | Fix limit 100 items
 1.0.1 | September 15, 2023 | Upgraded to SPFX 1.17.4
+1.0.2 | June 26, 2026   | SPFX Upgrade to 1.22.2
+
+
 
 ## Minimal Path to Awesome
 - Clone this repository
 - Ensure that you are at the solution folder
-- Ensure the current version of the Node.js (16.3+)
-- In the command-line run:
-  - **npm install**
-  - **gulp clean**
-  - **gulp serve**
+- To install the dependencies, in the command-line run:
+  - `npm install -g @rushstack/heft`
+  - `npm install`
 - To debug in the front end:
-  - go to the `serve.json` file and update `initialPage` to `https://domain-name.sharepoint.com/_layouts/15/workbench.aspx`
-  - Run the command **gulp serve**
+  - go to the `serve.json` file and update `initialPage` to `https://your-domain-name.sharepoint.com/_layouts/15/workbench.aspx`
+  - In the command-line run:
+    - `heft start`
+    - You will need to add your client id and azure function to the clientId and url classs members in the SCW.tsx file.
 - To deploy:
-  in the command-line run
-  - **gulp clean**
-  - **gulp bundle --ship**
-  - **gulp package-solution --ship**
+  - In the command-line run:
+    - `heft build --production`
+    - `heft package-solution --production`
 - Add the webpart to your tenant app store
 - Add the Webpart to a page
 - Create FAQ List (a SharePoint List) with following fields in the page content of that page
